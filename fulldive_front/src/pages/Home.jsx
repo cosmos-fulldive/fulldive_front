@@ -110,7 +110,7 @@ const liveData = [
   },
 ];
 
-const Main = () => {
+const Home = () => {
   // const stageData = useRecoilValue(getMainStageData);
   // const newData = useRecoilValue(getMainArtistData);
 
@@ -404,4 +404,4 @@ const SwiperLayout = styled.div`
   } */
 `;
 
-export default Main;
+export default Home;
