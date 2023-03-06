@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
 // import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { Route, Routes } from 'react-router-dom';
+import { Routes } from "react-router-dom";
+
 const menus = [
   {
     id: 1,
@@ -80,36 +81,36 @@ const company_setting_menus = [
   },
 ];
 
-const artist_setting_menus = [
-  {
-    id: 1,
-    name: "프로필",
-    imgUrl: "/images/setting/user.svg",
-    nowImgUrl: "/images/setting/user_white.svg",
-    pathname: "/setting/profile",
-  },
-  // {
-  //   id: 2,
-  //   name: "애널리틱스",
-  //   imgUrl: "/images/setting/analytics.svg",
-  //   nowImgUrl: "/images/setting/analytics_white.svg",
-  //   pathname: "/setting/analytics",
-  // },
-  {
-    id: 2,
-    name: "스튜디오",
-    imgUrl: "/images/setting/studio.svg",
-    nowImgUrl: "/images/setting/studio_white.svg",
-    pathname: "/setting/studio",
-  },
-  {
-    id: 3,
-    name: "수익정산",
-    imgUrl: "/images/setting/coin.svg",
-    nowImgUrl: "/images/setting/coin_white.svg",
-    pathname: "/setting/coin",
-  },
-];
+// const artist_setting_menus = [
+//   {
+//     id: 1,
+//     name: "프로필",
+//     imgUrl: "/images/setting/user.svg",
+//     nowImgUrl: "/images/setting/user_white.svg",
+//     pathname: "/setting/profile",
+//   },
+//   // {
+//   //   id: 2,
+//   //   name: "애널리틱스",
+//   //   imgUrl: "/images/setting/analytics.svg",
+//   //   nowImgUrl: "/images/setting/analytics_white.svg",
+//   //   pathname: "/setting/analytics",
+//   // },
+//   {
+//     id: 2,
+//     name: "스튜디오",
+//     imgUrl: "/images/setting/studio.svg",
+//     nowImgUrl: "/images/setting/studio_white.svg",
+//     pathname: "/setting/studio",
+//   },
+//   {
+//     id: 3,
+//     name: "수익정산",
+//     imgUrl: "/images/setting/coin.svg",
+//     nowImgUrl: "/images/setting/coin_white.svg",
+//     pathname: "/setting/coin",
+//   },
+// ];
 
 const user_setting_menus = [
   {
@@ -149,6 +150,8 @@ const MainLeft = () => {
   const setting_pathname_split = pathname.split("/")[2];
   const token = useSelector((state) => state.Auth.token);
   const admin = useSelector((state) => state.Auth.admin);
+
+  console.log(pathname);
 
   return (
     <>

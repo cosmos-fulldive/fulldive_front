@@ -127,8 +127,6 @@ const Home = () => {
     await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data));
   };
 
-  console.log(StageData);
-
   return (
     <Container>
       <React.Suspense fallback={<div>Loading...</div>}>
@@ -179,7 +177,7 @@ const Home = () => {
             <SwiperLayout>
               <Swiper className="liveStage-swiper" slidesPerView={4} spaceBetween={20} loop={true}>
                 {StageData &&
-                  StageData.stageStartInfo.map((data ,id) => (
+                  StageData.stageStartInfo.map((data, id) => (
                     <SwiperSlide key={id}>
                       <Figure href={data.stageStreamKey} artist="none">
                         <Live>
@@ -364,7 +362,6 @@ const ImageArea = styled.img`
   left: 0;
   border-radius: 12px;
 `;
-
 
 const Figure = styled.a`
   display: block;
