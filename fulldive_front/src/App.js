@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import store from "./store/ConfigStore";
 import { GlobalStyles } from "./components/styles/GlobalStyles";
+import Login from "./pages/login/Login";
 
 const persistor = persistStore(store);
 
@@ -25,7 +26,8 @@ function App() {
               <Wrap>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="" element={<Stage />} />
+                  <Route path="/stage" element={<Stage />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/*" element={<NotFound />} />
                 </Routes>
               </Wrap>
