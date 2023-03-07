@@ -1,12 +1,8 @@
-
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
 const SignupComplete = () => {
-
-
   const userInfo = {
     user_email: sessionStorage.getItem("fullEmail"),
     user_password: sessionStorage.getItem("password"),
@@ -29,7 +25,11 @@ const SignupComplete = () => {
         <img src="/images/signup/complete.svg" width="100px" height="100px" />
         <div>가입완료</div>
         <p>Welcome to FullDive!</p>
+<<<<<<< HEAD
         <Link to="/" legacyBehavior passHref>
+=======
+        <Link to="/">
+>>>>>>> 09d4e8257497f1c56ac393ef83ef983357c3d9bf
           <button>메인으로 이동</button>
         </Link>
       </Form>
