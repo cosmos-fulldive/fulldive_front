@@ -13,6 +13,10 @@ import { GlobalStyles } from "./components/styles/GlobalStyles";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup.jsx";
 import Type from "./pages/signup/type/type";
+import Agreement from "./pages/signup/type/Agreement.jsx";
+import PrivateInfo from "./pages/signup/type/PrivateInfo.jsx";
+// import FavoriteMusic from "./pages/signup/type/FavoriteMusic.jsx";
+import SignupComplete from "./pages/signup/type/SignupComplete.jsx";
 
 const persistor = persistStore(store);
 
@@ -32,6 +36,10 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/signup/type" element={<Type />} />
+                  <Route path="/signup/type/agreement" element={<Agreement />} />
+                  <Route path="/signup/type/privateInfo" element={<PrivateInfo />} />
+                  {/* <Route path="/signup/type/favoriteMusic" element={<FavoriteMusic />} /> */}
+                  <Route path="/signup/type/signupComplete" element={<SignupComplete />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Wrap>

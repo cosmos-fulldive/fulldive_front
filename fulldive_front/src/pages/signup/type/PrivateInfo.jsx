@@ -1,43 +1,57 @@
 import React, { useState, ChangeEvent } from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import Router, { useRouter } from "next/router";
-import countries from "../../../../components/countries.json";
+import {Link , useNavigate } from "react-router-dom";
+import countries from "../../../components/countries.json";
+
+import User from '../../../assets/images/signup/user.svg'
+import Checkedimg from '../../../assets/images/signup/checked.svg'
+import Areement_white from '../../../assets/images/signup/agreement_white.svg'
+import Edit from '../../../assets/images/signup/edit.svg'
+import Setting from '../../../assets/images/signup/setting.svg'
+import Camera from '../../../assets/images/signup/camera.svg'
+
 
 const menus = [
   {
     id: 1,
     name: "약관 동의",
-    imgUrl: "/images/signup/agreement_white.svg",
+    imgUrl: Areement_white,
   },
   {
     id: 2,
     name: "개인정보 입력",
-    imgUrl: "/images/signup/edit.svg",
+    imgUrl: Edit,
   },
+  // {
+  //   id: 3,
+  //   name: "좋아하는 장르",
+  //   imgUrl: "/images/signup/music.svg",
+  // },
   {
     id: 3,
-    name: "좋아하는 장르",
-    imgUrl: "/images/signup/music.svg",
-  },
-  {
-    id: 4,
     name: "가입 완료",
-    imgUrl: "/images/signup/setting.svg",
+    imgUrl: Setting,
   },
 ];
 
 const PrivateInfo = () => {
+
+  const navigate = useNavigate();
+
   const userInfo = {
-    email: sessionStorage.getItem("fullEmail"),
-    password: sessionStorage.getItem("password"),
-    Type: sessionStorage.getItem("type"),
+    email: sessionStorage.getItem('fullEmail'),
+    password: sessionStorage.getItem('password'),
+    Type: sessionStorage.getItem('type'),
     // Type : type,
-  };
+
+  }
 
   console.log(userInfo);
 
+
+
   const [values, setValues] = useState({
+
     nickname: "",
     gender: "",
     name: "",
@@ -47,6 +61,7 @@ const PrivateInfo = () => {
     address: "",
     phone: "",
     phoneCountry: "",
+
   });
 
   const { nickname, name, brith, country, city, address, phone, phoneCountry } = values;
@@ -60,11 +75,13 @@ const PrivateInfo = () => {
     </option>
   ));
 
-  const handleCountryCodeChange = (event) => {
-    setCountryCode(event.target.value);
+  const handleCountryCodeChange = (e) => {
+    setCountryCode(e.target.value);
   };
 
-  const [selected, setSelected] = useState("");
+
+  const [selected, setSelected] = useState("")
+
 
   const onChangeValues = (e) => {
     const { value, name } = e.target;
@@ -78,38 +95,76 @@ const PrivateInfo = () => {
 
   const [genderSelected, setgenderSelected] = useState("남");
 
+
+
+
+
   const handleChange = (e) => {
     setgenderSelected(e.target.value);
   };
 
-  const nextUrl = () => {
-    if (sessionStorage.getItem("password") === null) {
-      alert("이메일 또는 비밀번호를 먼저 입력하세요");
-      Router.push("/signup");
-    } else {
-      // sessionStorage.setItem('회원유형', )
+  // 이미지 url
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
-      sessionStorage.setItem("Nickname", nickname);
-      sessionStorage.setItem("Gender", genderSelected);
-      sessionStorage.setItem("Name", name);
-      sessionStorage.setItem("Brith", brith);
-      sessionStorage.setItem("Country", country);
-      sessionStorage.setItem("City", city);
-      sessionStorage.setItem("Address", address);
-      sessionStorage.setItem("Phone", phone);
-      sessionStorage.setItem("phoneCountry", countryCode);
+  console.log(file);
 
-      Router.push("/signup/type/favoriteMusic");
+  const handleFileInputChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPreviewUrl(fileReader.result);
+      };
+      fileReader.readAsDataURL(selectedFile);
     }
   };
 
-  const backUrl = () => {
-    window.location.href = "/signup/type/agreement";
+  const nextUrl = () => {
+    if (sessionStorage.getItem('password') === null) {
+      alert("이메일 또는 비밀번호를 먼저 입력하세요")
+      navigate("/signup")
+    } else {
+
+
+
+
+      const formData = new FormData();
+
+      formData.append("photo", file)
+
+      for (const value of formData.values("file")) {
+        console.log(value);
+      }
+
+      sessionStorage.setItem('photo', formData.get("photo"));
+      sessionStorage.setItem('userProfileImage', file.name)
+      sessionStorage.setItem('Nickname', nickname)
+      sessionStorage.setItem('Gender', genderSelected)
+      sessionStorage.setItem('Name', name)
+      sessionStorage.setItem('Brith', brith)
+      sessionStorage.setItem('Country', country)
+      sessionStorage.setItem('City', city)
+      sessionStorage.setItem('Address', address)
+      sessionStorage.setItem('Phone', phone)
+      sessionStorage.setItem('phoneCountry', countryCode)
+
+      navigate("/signup/type/favoriteMusic")
+
+    }
+
+
+
   };
+
+  const backUrl = () => {
+    window.location.href = '/signup/type/agreement';
+  }
 
   return (
     <Container>
-      <Form>
+      <Form >
         <Title>회원가입</Title>
         <Top>
           {menus.map((menu, id) => (
@@ -121,19 +176,39 @@ const PrivateInfo = () => {
 
         <Main>
           <Ex>
-            <Profile></Profile>
+
+            <Profile >
+
+              <ImgBox>
+
+                {
+                  previewUrl === null
+                    ? <Image src="/images/user.svg" />
+                    : <PreviewImage src={previewUrl} />
+                }
+              </ImgBox>
+              <ImgBox2>
+                <label htmlFor="ex_file">
+                  <div className="btnStart">
+                    <Image2 src={"/images/signup/camera.svg"} />
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  id="ex_file"
+                  accept="image/jpg, image/png, image/jpeg"
+                  onChange={handleFileInputChange}
+                />
+
+                {/* <input type="image" src="/images/signup/camera.svg" alt="제출버튼"></input> */}
+
+              </ImgBox2>
+            </Profile>
           </Ex>
           <InputForm className="one">
             <Individual>
               <div>닉네임</div>
-              <input
-                name="nickname"
-                type="text"
-                className="nickname"
-                placeholder="닉네임을 입력해주세요."
-                value={nickname}
-                onChange={onChangeValues}
-              />
+              <input name="nickname" type="text" className="nickname" placeholder="닉네임을 입력해주세요." value={nickname} onChange={onChangeValues} />
             </Individual>
             <Individual>
               <div>성별</div>
@@ -166,14 +241,7 @@ const PrivateInfo = () => {
             </Individual>
           </InputForm>
           <Individual>
-            <input
-              type="text"
-              name="address"
-              className="location"
-              placeholder="상세주소를 입력하세요. (선택사항)"
-              value={address}
-              onChange={onChangeValues}
-            />
+            <input type="text" name="address" className="location" placeholder="상세주소를 입력하세요. (선택사항)" value={address} onChange={onChangeValues} />
           </Individual>
 
           <InputForm className="third">
@@ -181,9 +249,13 @@ const PrivateInfo = () => {
               <div>휴대전화</div>
             </InputFormText>
             <IndividualBox>
+
               <Individual className="ex1">
                 {/* <input type="text" name="phoneCountry" className="name" placeholder="대한민국" value={phoneCountry} onChange={onChangeValues} /> */}
-                <Selectt value={countryCode} onChange={handleCountryCodeChange}>
+                <Selectt
+                  value={countryCode}
+                  onChange={handleCountryCodeChange}
+                >
                   {countryOptions}
                 </Selectt>
               </Individual>
@@ -191,40 +263,102 @@ const PrivateInfo = () => {
               <Individual className="ex2">
                 <input type="text" name="phone" className="date" placeholder="010-0000-0000" value={phone} onChange={onChangeValues} />
               </Individual>
+
             </IndividualBox>
           </InputForm>
         </Main>
         <Bottom>
-          <button onClick={backUrl} className="previous">
-            이전
-          </button>
+          <button onClick={backUrl} className="previous">이전</button>
 
-          <button onClick={nextUrl} className="next">
-            다음
-          </button>
+
+          <button onClick={nextUrl} className="next">다음</button>
         </Bottom>
       </Form>
     </Container>
   );
 };
 
+
+
+const Ex = styled.div`
+display : flex;
+justify-content : center;
+`;
+
 const Profile = styled.div`
-  display: flex;
+display : flex;
 
   margin-bottom: 35px;
   border-radius: 100px;
-  background-color: #28282f;
-  width: 6.75rem;
-  height: 6.75rem;
+  background-color :  #28282F;
+  width : 6.75rem;
+  height : 6.75rem;
+  position: relative;
 `;
 
-const Ex = styled.div`
-  display: flex;
+const ImgBox = styled.div`
+display : flex;
+width : 100%;
+justify-content : center;
+align-items: center;
+`;
+
+
+const Image = styled.img`
+width : 60px;
+height : 60px;
+display : flex;
+border-radius : 100px;
+
+`;
+
+const PreviewImage = styled.img`
+width : 6.75rem;
+  height : 6.75rem;
+display : flex;
+border-radius : 100px;
+
+`;
+
+const ImgBox2 = styled.div`
+display : flex;
+width : 36px;
+height : 36px;
+justify-content : center;
+background-color : #273DFF;
+border-radius : 100px;
+align-items: center;
+position: absolute;
+left: 79px;
+bottom: 0px;
+
+label {
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+`;
+
+const Image2 = styled.img`
+width : 18px;
+height : 18px;
+display : flex;
+
+
 `;
 
 const Selectt = styled.select`
-  width: 100%;
-  text-align: left;
+width: 100%;
+text-align: left;
+
 
   margin-top: 10px;
   border: none;
@@ -238,6 +372,7 @@ const Selectt = styled.select`
   &.location {
     width: 100%;
   }
+
 `;
 
 const Gender = styled.div`
@@ -249,11 +384,11 @@ const Gender = styled.div`
 `;
 
 const InputFormText = styled.div`
-  display: flex;
+  display : flex;
 `;
 const IndividualBox = styled.div`
-  display: flex;
-  gap: 24px;
+  display : flex;
+  gap : 24px;
 `;
 
 const Individual = styled.div`
@@ -275,27 +410,34 @@ const Individual = styled.div`
   }
 
   &.ex1 {
+
     flex: 0.4;
   }
-
+  
   &.ex2 {
+  
     flex: 2;
   }
 `;
 
 const InputForm = styled.div`
   display: flex;
+  
+  
 
   &.one {
-    gap: 24px;
+    gap : 24px;
+    
+    
   }
 
   &.second {
     margin-top: 24px;
-    gap: 24px;
+    gap : 24px;
+    
   }
 
-  &.third {
+  &.third{
     display: flex;
     margin-top: 24px;
     flex-direction: column;
@@ -307,24 +449,26 @@ const Main = styled.div`
 `;
 
 const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 60px;
-  margin: 10% auto;
-  > button {
-    width: 50%;
-    border-radius: 200px;
-    font-size: 1rem;
-    &.previous {
-      border: 1px solid #888888;
-    }
-    &.next {
-      background-color: #273dff;
-      margin-left: 24px;
-    }
+display: flex;
+justify-content: space-between;
+width: 100%;
+height: 60px;
+margin: 10% auto;
+> button {
+  width: 50%;
+  border-radius: 200px;
+  font-size: 1rem;
+  &.previous {
+    border: 1px solid #888888;
   }
+  &.next {
+    background-color: #273dff;
+    margin-left: 24px;
+  }
+}
 `;
+
+
 
 const Menu = styled.div`
   position: relative;

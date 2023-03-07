@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import styled from "styled-components";
-// import Ex from "../../../public/images/signup/user.svg";
-// import Ex2 from "../../../public/images/signup/user_white.svg";
-import { boolean } from "yup";
-import { useNavigation } from "react-router-dom";
+// import { boolean } from "yup";
 
-const types = [
-  {
-    id: 1,
-    description: "일반(팬)",
-  },
-  {
-    id: 2,
-    description: "아티스트",
-  },
-];
+import { useNavigate } from "react-router-dom";
+
+import User from '../../../assets/images/signup/user.svg'
+import User_White from '../../../assets/images/signup/user_white.svg'
+import Checkedimg from '../../../assets/images/signup/checked.svg'
+
 
 const Type = () => {
-  const navigate = useNavigation();
+
+  const navigate = useNavigate();
+  
   const sessionStorage = window.sessionStorage;
   // console.log(sessionStorage.getItem('fullEmail'));
   // console.log(sessionStorage.getItem('password'));
@@ -48,11 +43,14 @@ const Type = () => {
 
   console.log(checkValue);
 
+  
+
   const nextUrl = () => {
+    
     if (sessionStorage.getItem("password") === null) {
       alert("이메일 또는 비밀번호를 먼저 입력하세요");
-      navigate("/signup");
-    } else if (isChecked == false && isChecked2 == false) {
+      // navigate("/signup");
+    } else if (isChecked === false && isChecked2 === false) {
       alert("You must check 1 checkboxes!");
       return;
     } else {
@@ -127,8 +125,8 @@ const MemberType = styled.div`
 
   ${({ checked }) =>
     !checked
-      ? `background: url("/images/signup/user.svg") no-repeat 50% 40% #0f0f15;`
-      : `background: url("/images/signup/user_white.svg") no-repeat 50% 40% #0f0f15;`}
+      ? `background: url(${User}) no-repeat 50% 40% #0f0f15;`
+      : `background: url(${User_White}) no-repeat 50% 40% #0f0f15;`}
 
   ${({ checked }) =>
     !checked
@@ -154,8 +152,8 @@ const MemberType2 = styled.div`
   border-radius: 12px;
   ${({ checked2 }) =>
     !checked2
-      ? `background: url("/images/signup/user.svg") no-repeat 50% 40% #0f0f15;`
-      : `background: url("/images/signup/user_white.svg") no-repeat 50% 40% #0f0f15;`}
+      ? `background: url(${User}) no-repeat 50% 40% #0f0f15;`
+      : `background: url(${User_White}) no-repeat 50% 40% #0f0f15;`}
 
   ${({ checked2 }) =>
     !checked2
@@ -183,14 +181,14 @@ const StyledInput = styled.input`
   margin-top: 1.25rem;
   margin-right: 1.25rem;
   border-radius: 100px;
-  background-image: url("/images/signup/checked.svg");
+  background-image: url(${Checkedimg});
   background-size: 70% 70%;
   background-position: 50% 60%;
   background-repeat: no-repeat;
   background-color: #5c5c5c;
   &:checked {
     border-color: transparent;
-    background-image: url("/images/signup/checked.svg");
+    background-image: url(${Checkedimg});
     background-color: #273dff;
   }
 `;

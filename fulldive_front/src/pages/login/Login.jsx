@@ -7,6 +7,13 @@ import { setToken, setAdmin } from "../../store/_redcuers/authReducer";
 import { useNavigate, Link } from "react-router-dom";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
+
+import Emailimg from '../../assets/images/login/email.svg'
+import Email_white from '../../assets/images/login/email_white.svg'
+import Passwordimg from '../../assets/images/login/password.svg'
+import password_white from '../../assets/images/login/password_white.svg'
+import password_visible from '../../assets/images/login/password_visible.svg'
+import password__non_visible from '../../assets/images/login/password_non_visible.svg'
 // import liff from '@line/liff';
 // import { GoogleLogin } from "@react-oauth/google";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -140,7 +147,7 @@ const Login = () => {
     <Container>
       <Wrap>
         <Form>
-          <Top>
+          {/* <Top>
             <Title>
               로그인<p>풀다이브에 오신것을 환영합니다.</p>
             </Title>
@@ -150,18 +157,19 @@ const Login = () => {
                   구글 계정으로 로그인
                 </SosicalLoginButton>
 
-                {/* <SosicalLoginButton onClick={LineLoginHandler} social="line">
+                <SosicalLoginButton onClick={LineLoginHandler} social="line">
                   라인 계정으로 로그인
-                </SosicalLoginButton> */}
+                </SosicalLoginButton>
               </div>
               <div>
-                {/* <SosicalLoginButton social="apple">애플 계정으로 로그인</SosicalLoginButton> */}
+                <SosicalLoginButton social="apple">애플 계정으로 로그인</SosicalLoginButton>
                 <SosicalLoginButton onClick={kakaoLogin} social="kakao">
                   카카오 계정으로 로그인
                 </SosicalLoginButton>
               </div>
             </SocialLogin>
-          </Top>
+          </Top> */}
+          
           <Or>또는</Or>
 
           <Formik
@@ -198,7 +206,9 @@ const Login = () => {
                   </EmailText>
 
                   <EmailForm>
+                    
                     <Email
+                    
                       onBlur={handleBlur}
                       className={errors.email && touched.email ? " error" : "none"}
                       name="email"
@@ -285,8 +295,8 @@ const VisibleIcon = styled.div`
   width: 24px;
   height: 22px;
   cursor: pointer;
-  background: url("/images/login/password_non_visible.svg") no-repeat;
-  ${({ type }) => type === "text" && ` background: url("/images/login/password_visible.svg") no-repeat;`}
+  background: url(${password__non_visible}) no-repeat;
+  ${({ type }) => type === "text" && ` background: url(${password_visible}) no-repeat;`}
 `;
 
 const Password = styled.input`
@@ -296,10 +306,10 @@ const Password = styled.input`
   border: none;
   border-radius: 100px;
   padding: 20px 40px 20px 60px;
-  background: url("/images/login/password.svg") no-repeat 25px 50% #28282f;
+  background: url(${Passwordimg}) no-repeat 25px 50% #28282f;
   :focus {
     border: 2px solid #273dff;
-    background: url("/images/login/password_white.svg") no-repeat 25px 50% #28282f;
+    background: url(${password_white}) no-repeat 25px 50% #28282f;
   }
   &.error {
     border: 2px solid #ff2e2e;
@@ -325,10 +335,10 @@ const Email = styled.input`
   border: none;
   border-radius: 100px;
   padding: 20px 40px 20px 60px;
-  background: url("/images/login/email.svg") no-repeat 25px 50% #28282f;
+  background: url(${Emailimg}) no-repeat 25px 50% #28282f;
   :focus {
     border: 2px solid #273dff;
-    background: url("/images/login/email_white.svg") no-repeat 25px 50% #28282f;
+    background: url(${Email_white}) no-repeat 25px 50% #28282f;
   }
 
   &.error {

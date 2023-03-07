@@ -1,10 +1,12 @@
-import Link from "next/link";
+
 import React from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
-import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 const SignupComplete = () => {
+
+
   const userInfo = {
     user_email: sessionStorage.getItem("fullEmail"),
     user_password: sessionStorage.getItem("password"),
@@ -27,7 +29,7 @@ const SignupComplete = () => {
         <img src="/images/signup/complete.svg" width="100px" height="100px" />
         <div>가입완료</div>
         <p>Welcome to FullDive!</p>
-        <Link href="/" legacyBehavior passHref>
+        <Link to="/" legacyBehavior passHref>
           <button>메인으로 이동</button>
         </Link>
       </Form>

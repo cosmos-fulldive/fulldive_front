@@ -1,27 +1,32 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Router, { useRouter } from "next/router"
+import { useNavigate } from "react-router-dom";
+
+import Checkedimg from '../../../assets/images/signup/checked.svg'
+import Areement_white from '../../../assets/images/signup/agreement_white.svg'
+import Edit from '../../../assets/images/signup/edit.svg'
+import Setting from '../../../assets/images/signup/setting.svg'
 
 const menus = [
   {
     id: 1,
     name: "약관 동의",
-    imgUrl: "/images/signup/agreement_white.svg",
+    imgUrl: Areement_white,
   },
   {
     id: 2,
     name: "개인정보 입력",
-    imgUrl: "/images/signup/edit.svg",
+    imgUrl: Edit,
   },
+  // {
+  //   id: 3,
+  //   name: "좋아하는 장르",
+  //   imgUrl: "/images/signup/music.svg",
+  // },
   {
     id: 3,
-    name: "좋아하는 장르",
-    imgUrl: "/images/signup/music.svg",
-  },
-  {
-    id: 4,
     name: "가입 완료",
-    imgUrl: "/images/signup/setting.svg",
+    imgUrl: Setting,
   },
 ];
 
@@ -46,6 +51,8 @@ const data = [
 
 const Agreement = () => {
 
+  const navigate = useNavigate();
+
   const userInfo = {
     email: sessionStorage.getItem('fullEmail'),
     password: sessionStorage.getItem('password'),
@@ -68,7 +75,7 @@ const Agreement = () => {
   const handleAllCheck = (checked) => {
     if (checked) {
       // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
-      const idArray
+      const idArray = [];
       data.forEach((el) => idArray.push(el.id));
       setCheckItems(idArray);
     } else {
@@ -86,11 +93,11 @@ const Agreement = () => {
   const nextUrl = () => {
     if (sessionStorage.getItem('password') === null) {
       alert("이메일 또는 비밀번호를 먼저 입력하세요")
-      Router.push("/signup")
+      navigate("/signup")
     } else if (userInfo.Type === "아티스트") {
-      Router.push("/signup/type/artistInfo")
+      navigate("/signup/type/artistInfo")
     }
-    Router.push("/signup/type/privateInfo")
+    navigate("/signup/type/privateInfo")
   };
 
 
@@ -212,14 +219,14 @@ const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 100px;
-  background-image: url("/images/signup/checked.svg");
+  background-image: url(${Checkedimg});
   background-size: 70% 70%;
   background-position: 50% 60%;
   background-repeat: no-repeat;
   background-color: #5c5c5c;
   &:checked {
     border-color: transparent;
-    background-image: url("/images/signup/checked.svg");
+    background-image: url(${Checkedimg});
     background-color: #273dff;
   }
 `;
@@ -259,7 +266,7 @@ const Menu = styled.div`
   height: 48px;
   background: ${(props) => `url(${props.imgUrl}) no-repeat center`};
   ${(props) =>
-    props.imgUrl === "/images/signup/agreement_white.svg" &&
+    props.imgUrl === Areement_white &&
     `
       border: 2px solid #273DFF;      
   `}
@@ -274,7 +281,7 @@ const Menu = styled.div`
 
 const Top = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 24px;
 `;
 
