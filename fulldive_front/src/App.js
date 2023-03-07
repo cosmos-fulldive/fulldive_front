@@ -21,7 +21,7 @@ import SignupComplete from "./pages/signup/type/SignupComplete.jsx";
 import ArtistComplete from "./pages/signup/type/ArtistComplete.jsx";
 import LiveStage from "./pages/stage/LiveStage.jsx";
 import UpcomingStage from "./pages/stage/UpcomingStage.jsx";
-import ExitStage from "./pages/stage/exitStage.jsx"
+import ExitStage from "./pages/stage/ExitStage.jsx";
 import Artist from "./pages/artist/Artist.jsx";
 
 const persistor = persistStore(store);
