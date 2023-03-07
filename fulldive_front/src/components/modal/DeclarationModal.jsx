@@ -33,12 +33,12 @@ const declaration_reasons = [
 ];
 
 const DeclarationModal = ({ visible, onClose }) => {
+  const [text, setText] = useState("");
+  const [checkedList, setCheckedList] = useState([]);
+
   if (!visible) {
     return null;
   }
-
-  const [text, setText] = useState("");
-  const [checkedList, setCheckedList] = useState([]);
 
   const checkOnlyOne = (checkThis) => {
     const checkedList = document.getElementsByName("test");
