@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
-const ExitStage = () => {
+const UpcomingStage = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -25,124 +25,122 @@ const ExitStage = () => {
     },
   ];
 
-  // const liveData = [
-  //   {
-  //     stageId: 1,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 2,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 3,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 4,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 5,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 6,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 7,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 8,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 9,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 10,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 11,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 12,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  // ];
+  const liveData = [
+    {
+      stageId: 1,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 2,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 3,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 4,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 5,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 6,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 7,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 8,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 9,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 10,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 11,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+    {
+      stageId: 12,
+      imgUrl: "/images/sample.png",
+      title: "공연제목",
+      artist: "공연 참여 아티스트",
+      ticket: "1장",
+      link: "/artist",
+      ticketImg: "/images/ticket.svg",
+    },
+  ];
 
   const [StageData, setStageData] = useState(null);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data.stageReadyInfo));
   }, []);
-
-  console.log(StageData);
 
   return (
     <Container>
@@ -279,4 +277,4 @@ const Container = styled.main`
   padding: 30px;
 `;
 
-export default ExitStage;
+export default UpcomingStage;

@@ -30,7 +30,7 @@ const Signup = () => {
   };
 
   const getEmail = () => {
-    axios.get(`${process.env.REACT_APP}/user/join`).then(function (res) {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/join`).then(function (res) {
       // 성공 핸들링
       console.log(res);
     });

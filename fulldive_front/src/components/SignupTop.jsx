@@ -41,7 +41,7 @@ const SignupTop = () => {
   return (
     <Nav>
       {menus.map((menu, index) => (
-        <Link href={menu.pathname} key={index} legacyBehavior passHref>
+        <Link href={menu.pathname} key={index}>
           <NavInfo key={index} imgUrl={menu.imgUrl} isHere={pathname === menu.pathname} nowImgUrl={menu.nowImgUrl}>
             {menu.name}
           </NavInfo>

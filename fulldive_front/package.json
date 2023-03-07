@@ -10,6 +10,7 @@
     "formik": "^2.2.9",
     "node": "^19.6.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-player": "^2.11.2",
     "react-redux": "^7.2.9",

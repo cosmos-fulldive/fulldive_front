@@ -121,7 +121,7 @@ const Stage = () => {
         <Left>
           <VideoContainer>
             <ReactPlayer
-              url={`${process.env.NEXT_PUBLIC_RTMP_SERVER_URL}/1.flv`}
+              url={`${process.env.REACT_APP_RTMP_SERVER_URL}/1.flv`}
               // #t=,00:01:00 <- 1분 미리보기
               muted={true}
               playing={true}
@@ -263,7 +263,7 @@ const Stage = () => {
             </div>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" />
-              <ChatButton>{/* <img src="/images/stage/sendbutton.svg" /> */}</ChatButton>
+              <ChatButton></ChatButton>
             </label>
           </ChatBoxContainer>
         </Right>

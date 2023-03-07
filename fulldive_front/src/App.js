@@ -13,10 +13,17 @@ import { GlobalStyles } from "./components/styles/GlobalStyles";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup.jsx";
 import Type from "./pages/signup/type/type";
+<<<<<<< HEAD
 import Agreement from "./pages/signup/type/Agreement.jsx";
 import PrivateInfo from "./pages/signup/type/PrivateInfo.jsx";
 // import FavoriteMusic from "./pages/signup/type/FavoriteMusic.jsx";
 import SignupComplete from "./pages/signup/type/SignupComplete.jsx";
+=======
+import LiveStage from "./pages/stage/LiveStage.jsx";
+import UpcomingStage from "./pages/stage/UpcomingStage.jsx";
+import ExitStage from "./pages/stage/ExitStage.jsx";
+import Artist from "./pages/artist/Artist.jsx";
+>>>>>>> 2d738ee5f3236a41b8855e4dccbb04ce192dc8bb
 
 const persistor = persistStore(store);
 
@@ -33,6 +40,10 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/stage" element={<Stage />} />
+                  <Route path="/stage/liveStage" element={<LiveStage />} />
+                  <Route path="/stage/upcomingStage" element={<UpcomingStage />} />
+                  <Route path="/stage/exitStage" element={<ExitStage />} />
+                  <Route path="/artist" element={<Artist />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/signup/type" element={<Type />} />
