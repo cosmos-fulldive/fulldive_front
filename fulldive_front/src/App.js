@@ -3,6 +3,7 @@ import Home from "./pages/Home.jsx";
 import styled from "styled-components";
 import MainTop from "./components/MainTop.jsx";
 import MainLeft from "./components/MainLeft.jsx";
+import Stage from "./pages/stage/Stage";
 import NotFound from "./404.jsx";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -24,6 +25,7 @@ function App() {
               <Wrap>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="" element={<Stage />} />
                   <Route path="/*" element={<NotFound />} />
                 </Routes>
               </Wrap>
