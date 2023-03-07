@@ -3,18 +3,15 @@ import React from "react";
 import styled from "styled-components";
 
 import { useSelector } from "react-redux";
-import { useLocation } from 'react-router-dom';
-import Home from '../assets/images/house.svg'
-import Homeafter from '../assets/images/house_white.svg'
-import Stage from '../assets/images/stage.svg'
-import Stage_white from '../assets/images/stage_white.svg'
-import Artist from '../assets/images/artist.svg'
-import Artist_white from '../assets/images/artist_white.svg'
-import Setting from '../assets/images/setting.svg'
-import Setting_white from '../assets/images/setting_white.svg'
-
-
-
+import { useLocation } from "react-router-dom";
+import Home from "../assets/images/house.svg";
+import Homeafter from "../assets/images/house_white.svg";
+import Stage from "../assets/images/stage.svg";
+import Stage_white from "../assets/images/stage_white.svg";
+import Artist from "../assets/images/artist.svg";
+import Artist_white from "../assets/images/artist_white.svg";
+import Setting from "../assets/images/setting.svg";
+import Setting_white from "../assets/images/setting_white.svg";
 
 const menus = [
   {
@@ -29,7 +26,7 @@ const menus = [
     name: "스테이지",
     imgUrl: Stage,
     nowImgUrl: Stage_white,
-    pathname: "/stage",
+    pathname: "/stage/liveStage",
   },
   {
     id: 3,
@@ -156,7 +153,7 @@ const user_setting_menus = [
 
 const MainLeft = () => {
   const location = useLocation();
-  const pathname  = location.pathname;
+  const pathname = location.pathname;
   const pathname_split = pathname.split("/")[1];
   const setting_pathname_split = pathname.split("/")[2];
   const token = useSelector((state) => state.Auth.token);
@@ -217,7 +214,7 @@ const Nav = styled.nav`
   position: fixed;
   padding-top: 100px;
   min-width: 250px;
-  top : 100px;
+  top: 100px;
   height: 100%;
   background: #181820;
   padding: 10px 30px;

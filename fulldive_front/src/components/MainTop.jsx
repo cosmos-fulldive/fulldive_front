@@ -16,7 +16,7 @@ const MainTop = () => {
       {token === "Test" ? (
         <Header>
           <Logo>
-            <Link href="/">FullDive</Link>
+            <Link to="/">FullDive</Link>
           </Logo>
           <Search>
             <SearchBar placeholder="검색어를 입력해주세요" />
@@ -33,7 +33,7 @@ const MainTop = () => {
       ) : (
         <Header>
           <Logo>
-            <Link href="/">FullDive</Link>
+            <Link to="/">FullDive</Link>
           </Logo>
           <Search>
             <SearchBar placeholder="검색어를 입력해주세요" />
@@ -43,7 +43,7 @@ const MainTop = () => {
                 <img src="/images/notification.svg" />
                 <img src="/images/ranking.svg" />
               </div> */}
-              <Link href="/login">
+              <Link to="/login">
                 <LoginButton>로그인</LoginButton>
               </Link>
             </RightBar>
