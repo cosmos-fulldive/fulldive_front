@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {Link , useNavigate } from "react-router-dom";
 import countries from "../../../components/countries.json";
 
-import User from '../../../assets/images/signup/user.svg'
+import User from '../../../assets/images/user.svg'
 import Checkedimg from '../../../assets/images/signup/checked.svg'
 import Areement_white from '../../../assets/images/signup/agreement_white.svg'
 import Edit from '../../../assets/images/signup/edit.svg'
@@ -183,14 +183,14 @@ const PrivateInfo = () => {
 
                 {
                   previewUrl === null
-                    ? <Image src="/images/user.svg" />
+                    ? <Image src={User} />
                     : <PreviewImage src={previewUrl} />
                 }
               </ImgBox>
               <ImgBox2>
                 <label htmlFor="ex_file">
                   <div className="btnStart">
-                    <Image2 src={"/images/signup/camera.svg"} />
+                    <Image2 src={Camera} />
                   </div>
                 </label>
                 <input
@@ -478,13 +478,13 @@ const Menu = styled.div`
   height: 48px;
   background: ${(props) => `url(${props.imgUrl}) no-repeat center`};
   ${(props) =>
-    props.imgUrl === "/images/signup/agreement_white.svg" &&
+    props.imgUrl === Areement_white &&
     `
       border: 2px solid #273DFF; 
       background-color: #273DFF;     
   `}
   ${(props) =>
-    props.imgUrl === "/images/signup/edit.svg" &&
+    props.imgUrl === Edit &&
     `
       border: 2px solid #273DFF; 
   `}
@@ -499,7 +499,7 @@ const Menu = styled.div`
 
 const Top = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 24px;
 `;
 

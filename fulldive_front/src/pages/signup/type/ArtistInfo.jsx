@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Link from "next/link";
-import Router, { useRouter } from "next/router";
-import { CallingCodePicker } from "@digieggs/rn-country-code-picker";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import countries from "../../../../components/countries.json";
+import countries from "../../../components/countries.json";
 
 const menus = [
   {
@@ -25,6 +23,9 @@ const menus = [
 ];
 
 const ArtistInfo = () => {
+
+  const navigate = useNavigate();
+
   const userInfo = {
     artistEmail: sessionStorage.getItem("fullEmail"),
     artistPassword: sessionStorage.getItem("password"),
@@ -88,7 +89,7 @@ const ArtistInfo = () => {
   const nextUrl = async () => {
     if (sessionStorage.getItem("password") === null) {
       alert("이메일 또는 비밀번호를 먼저 입력하세요");
-      Router.push("/signup");
+      navigate("/signup");
     } else {
       // sessionStorage.setItem('회원유형', )
 
@@ -133,7 +134,7 @@ const ArtistInfo = () => {
         });
         console.log(data.response);
         data.response === 200 && window.alert("회원가입 성공");
-        Router.push("/signup/type/artistComplete");
+        navigate("/signup/type/artistComplete");
       } catch (e) {
         // 서버에서 받은 에러 메시지 출력
         console.log(e);

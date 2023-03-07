@@ -1,10 +1,11 @@
-import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { useRouter } from "next/router";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ArtistComplete = () => {
+
+  
+
   const userInfo = {
     user_email: sessionStorage.getItem("fullEmail"),
     user_password: sessionStorage.getItem("password"),
@@ -27,7 +28,7 @@ const ArtistComplete = () => {
         <img src="/images/signup/complete.svg" width="100px" height="100px" />
         <div>가입 요청 완료</div>
         <p>가입 승인까지 영업일 기준 최대 3~5일이 소요됩니다.</p>
-        <Link href="/">
+        <Link to="/">
           <button>메인으로 이동</button>
         </Link>
       </Form>

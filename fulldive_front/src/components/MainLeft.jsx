@@ -159,7 +159,7 @@ const MainLeft = () => {
   const token = useSelector((state) => state.Auth.token);
   const admin = useSelector((state) => state.Auth.admin);
 
-  console.log(pathname);
+  
 
   return (
     <>
