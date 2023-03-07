@@ -4,35 +4,28 @@ import styled from "styled-components";
 
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import Home from "../assets/images/house.svg";
-import Homeafter from "../assets/images/house_white.svg";
-import Stage from "../assets/images/stage.svg";
-import Stage_white from "../assets/images/stage_white.svg";
-import Artist from "../assets/images/artist.svg";
-import Artist_white from "../assets/images/artist_white.svg";
-import Setting from "../assets/images/setting.svg";
-import Setting_white from "../assets/images/setting_white.svg";
+
 
 const menus = [
   {
     id: 1,
     name: "홈",
-    imgUrl: Home,
-    nowImgUrl: Homeafter,
+    imgUrl: "/images/house.svg",
+    nowImgUrl: "/images/house_white.svg",
     pathname: "/",
   },
   {
     id: 2,
     name: "스테이지",
-    imgUrl: Stage,
-    nowImgUrl: Stage_white,
+    imgUrl: "/images/stage.svg",
+    nowImgUrl: "/images/stage_white.svg",
     pathname: "/stage/liveStage",
   },
   {
     id: 3,
     name: "아티스트",
-    imgUrl: Artist,
-    nowImgUrl: Artist_white,
+    imgUrl: "/images/artist.svg",
+    nowImgUrl: "/images/artist_white.svg",
     pathname: "/artist",
   },
   // {
@@ -43,10 +36,10 @@ const menus = [
   //   pathname: "/store",
   // },
   {
-    id: 5,
+    id: 4,
     name: "설정",
-    imgUrl: Setting,
-    nowImgUrl: Setting_white,
+    imgUrl: "/images/setting.svg",
+    nowImgUrl: "/images/setting_white.svg",
     pathname: "/setting/profile",
   },
   // {

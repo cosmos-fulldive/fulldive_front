@@ -4,11 +4,6 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 
-import User from '../../../assets/images/signup/user.svg'
-import User_White from '../../../assets/images/signup/user_white.svg'
-import Checkedimg from '../../../assets/images/signup/checked.svg'
-
-
 const Type = () => {
 
   const navigate = useNavigate();
@@ -125,8 +120,8 @@ const MemberType = styled.div`
 
   ${({ checked }) =>
     !checked
-      ? `background: url(${User}) no-repeat 50% 40% #0f0f15;`
-      : `background: url(${User_White}) no-repeat 50% 40% #0f0f15;`}
+    ? `background: url("/images/signup/user.svg") no-repeat 50% 40% #0f0f15;`
+      : `background: url("/images/signup/user_white.svg") no-repeat 50% 40% #0f0f15;`}
 
   ${({ checked }) =>
     !checked
@@ -152,8 +147,8 @@ const MemberType2 = styled.div`
   border-radius: 12px;
   ${({ checked2 }) =>
     !checked2
-      ? `background: url(${User}) no-repeat 50% 40% #0f0f15;`
-      : `background: url(${User_White}) no-repeat 50% 40% #0f0f15;`}
+    ? `background: url("/images/signup/user.svg") no-repeat 50% 40% #0f0f15;`
+      : `background: url("/images/signup/user_white.svg") no-repeat 50% 40% #0f0f15;`}
 
   ${({ checked2 }) =>
     !checked2
@@ -181,14 +176,14 @@ const StyledInput = styled.input`
   margin-top: 1.25rem;
   margin-right: 1.25rem;
   border-radius: 100px;
-  background-image: url(${Checkedimg});
+  background-image: url("/images/signup/checked.svg");
   background-size: 70% 70%;
   background-position: 50% 60%;
   background-repeat: no-repeat;
   background-color: #5c5c5c;
   &:checked {
     border-color: transparent;
-    background-image: url(${Checkedimg});
+    background-image: url("/images/signup/checked.svg");
     background-color: #273dff;
   }
 `;

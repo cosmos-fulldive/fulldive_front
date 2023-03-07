@@ -2,21 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import Checkedimg from '../../../assets/images/signup/checked.svg'
-import Areement_white from '../../../assets/images/signup/agreement_white.svg'
-import Edit from '../../../assets/images/signup/edit.svg'
-import Setting from '../../../assets/images/signup/setting.svg'
 
 const menus = [
   {
     id: 1,
     name: "약관 동의",
-    imgUrl: Areement_white,
+    imgUrl: "/images/signup/agreement_white.svg",
   },
   {
     id: 2,
     name: "개인정보 입력",
-    imgUrl: Edit,
+    imgUrl: "/images/signup/edit.svg",
   },
   // {
   //   id: 3,
@@ -26,10 +22,9 @@ const menus = [
   {
     id: 3,
     name: "가입 완료",
-    imgUrl: Setting,
+    imgUrl: "/images/signup/setting.svg",
   },
 ];
-
 const data = [
   {
     id: 1,
@@ -219,14 +214,14 @@ const StyledInput = styled.input`
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 100px;
-  background-image: url(${Checkedimg});
+  background-image: url("/images/signup/checked.svg");
   background-size: 70% 70%;
   background-position: 50% 60%;
   background-repeat: no-repeat;
   background-color: #5c5c5c;
   &:checked {
     border-color: transparent;
-    background-image: url(${Checkedimg});
+    background-image: url("/images/signup/checked.svg");
     background-color: #273dff;
   }
 `;
@@ -266,7 +261,7 @@ const Menu = styled.div`
   height: 48px;
   background: ${(props) => `url(${props.imgUrl}) no-repeat center`};
   ${(props) =>
-    props.imgUrl === Areement_white &&
+    props.imgUrl === "/images/signup/agreement_white.svg" &&
     `
       border: 2px solid #273DFF;      
   `}

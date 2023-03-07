@@ -3,24 +3,17 @@ import styled from "styled-components";
 import {Link , useNavigate } from "react-router-dom";
 import countries from "../../../components/countries.json";
 
-import User from '../../../assets/images/user.svg'
-import Checkedimg from '../../../assets/images/signup/checked.svg'
-import Areement_white from '../../../assets/images/signup/agreement_white.svg'
-import Edit from '../../../assets/images/signup/edit.svg'
-import Setting from '../../../assets/images/signup/setting.svg'
-import Camera from '../../../assets/images/signup/camera.svg'
-
 
 const menus = [
   {
     id: 1,
     name: "약관 동의",
-    imgUrl: Areement_white,
+    imgUrl: "/images/signup/agreement_white.svg",
   },
   {
     id: 2,
     name: "개인정보 입력",
-    imgUrl: Edit,
+    imgUrl: "/images/signup/edit.svg",
   },
   // {
   //   id: 3,
@@ -30,7 +23,7 @@ const menus = [
   {
     id: 3,
     name: "가입 완료",
-    imgUrl: Setting,
+    imgUrl: "/images/signup/setting.svg",
   },
 ];
 
@@ -159,7 +152,7 @@ const PrivateInfo = () => {
   };
 
   const backUrl = () => {
-    window.location.href = '/signup/type/agreement';
+    window.location.href = '/signup/type';
   }
 
   return (
@@ -183,14 +176,14 @@ const PrivateInfo = () => {
 
                 {
                   previewUrl === null
-                    ? <Image src={User} />
+                    ? <Image src="/images/user.svg" />
                     : <PreviewImage src={previewUrl} />
                 }
               </ImgBox>
               <ImgBox2>
                 <label htmlFor="ex_file">
                   <div className="btnStart">
-                    <Image2 src={Camera} />
+                    <Image2 src={"/images/signup/camera.svg"}  />
                   </div>
                 </label>
                 <input
@@ -478,13 +471,13 @@ const Menu = styled.div`
   height: 48px;
   background: ${(props) => `url(${props.imgUrl}) no-repeat center`};
   ${(props) =>
-    props.imgUrl === Areement_white &&
+    props.imgUrl === "/images/signup/agreement_white.svg" &&
     `
       border: 2px solid #273DFF; 
       background-color: #273DFF;     
   `}
   ${(props) =>
-    props.imgUrl === Edit &&
+    props.imgUrl === "/images/signup/edit.svg" &&
     `
       border: 2px solid #273DFF; 
   `}

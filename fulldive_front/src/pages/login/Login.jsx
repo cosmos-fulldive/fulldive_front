@@ -8,12 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 
-import Emailimg from '../../assets/images/login/email.svg'
-import Email_white from '../../assets/images/login/email_white.svg'
-import Passwordimg from '../../assets/images/login/password.svg'
-import password_white from '../../assets/images/login/password_white.svg'
-import password_visible from '../../assets/images/login/password_visible.svg'
-import password__non_visible from '../../assets/images/login/password_non_visible.svg'
+
 // import liff from '@line/liff';
 // import { GoogleLogin } from "@react-oauth/google";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -295,8 +290,8 @@ const VisibleIcon = styled.div`
   width: 24px;
   height: 22px;
   cursor: pointer;
-  background: url(${password__non_visible}) no-repeat;
-  ${({ type }) => type === "text" && ` background: url(${password_visible}) no-repeat;`}
+  background: url("/images/login/password_non_visible.svg") no-repeat;
+  ${({ type }) => type === "text" && ` background: url("/images/login/password_visible.svg") no-repeat;`}
 `;
 
 const Password = styled.input`
@@ -306,13 +301,13 @@ const Password = styled.input`
   border: none;
   border-radius: 100px;
   padding: 20px 40px 20px 60px;
-  background: url(${Passwordimg}) no-repeat 25px 50% #28282f;
+  background: url("/images/login/password.svg") no-repeat 25px 50% #28282f;
   :focus {
     border: 2px solid #273dff;
-    background: url(${password_white}) no-repeat 25px 50% #28282f;
+    background: url("/images/login/password_white.svg") no-repeat 25px 50% #28282f;
   }
   &.error {
-    border: 2px solid #ff2e2e;
+    border : 2px solid #FF2E2E;
   }
 `;
 
@@ -335,14 +330,14 @@ const Email = styled.input`
   border: none;
   border-radius: 100px;
   padding: 20px 40px 20px 60px;
-  background: url(${Emailimg}) no-repeat 25px 50% #28282f;
+  background: url("/images/login/email.svg") no-repeat 25px 50% #28282f;
   :focus {
     border: 2px solid #273dff;
-    background: url(${Email_white}) no-repeat 25px 50% #28282f;
+    background: url("/images/login/email_white.svg") no-repeat 25px 50% #28282f;
   }
 
   &.error {
-    border: 2px solid #ff2e2e;
+    border : 2px solid #FF2E2E;
   }
 `;
 
