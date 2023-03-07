@@ -1,10 +1,9 @@
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Router, { useRouter } from "next/router";
-import Ex from "../../../public/images/signup/user.svg";
-import Ex2 from "../../../public/images/signup/user_white.svg";
+// import Ex from "../../../public/images/signup/user.svg";
+// import Ex2 from "../../../public/images/signup/user_white.svg";
 import { boolean } from "yup";
+import { useNavigation } from "react-router-dom";
 
 const types = [
   {
@@ -17,7 +16,8 @@ const types = [
   },
 ];
 
-const index = () => {
+const Type = () => {
+  const navigate = useNavigation();
   const sessionStorage = window.sessionStorage;
   // console.log(sessionStorage.getItem('fullEmail'));
   // console.log(sessionStorage.getItem('password'));
@@ -51,14 +51,14 @@ const index = () => {
   const nextUrl = () => {
     if (sessionStorage.getItem("password") === null) {
       alert("이메일 또는 비밀번호를 먼저 입력하세요");
-      Router.push("/signup");
+      navigate("/signup");
     } else if (isChecked == false && isChecked2 == false) {
       alert("You must check 1 checkboxes!");
       return;
     } else {
       sessionStorage.setItem("type", checkValue);
 
-      Router.push("/signup/type/agreement");
+      navigate("/signup/type/agreement");
     }
   };
 
@@ -237,4 +237,4 @@ const Container = styled.div`
 
 // `;
 
-export default index;
+export default Type;

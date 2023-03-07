@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   const [passwordType, setPasswordType] = useState({
     type: "password",
     visible: false,
@@ -348,4 +348,4 @@ const Container = styled.main`
   display: flex;
 `;
 
-export default Login;
+export default Signup;

@@ -237,7 +237,7 @@ const Login = () => {
                   <LoginButton type="submit">접속하기</LoginButton>
                   <Bottom>
                     {/* <p className="mssing_user">아이디 / 비밀번호 찾기</p> */}
-                    <Link href="/signup">
+                    <Link to="/signup">
                       <p>계정이 없으신가요?</p>
                     </Link>
                   </Bottom>

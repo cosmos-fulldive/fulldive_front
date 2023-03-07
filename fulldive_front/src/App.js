@@ -11,6 +11,8 @@ import { persistStore } from "redux-persist";
 import store from "./store/ConfigStore";
 import { GlobalStyles } from "./components/styles/GlobalStyles";
 import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup.jsx";
+import Type from "./pages/signup/type/type";
 
 const persistor = persistStore(store);
 
@@ -28,7 +30,9 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/stage" element={<Stage />} />
                   <Route path="/login" element={<Login />} />
-                  <Route path="/*" element={<NotFound />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/signup/type" element={<Type />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </Wrap>
             </PersistGate>

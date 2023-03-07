@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const NotFound = () => {
   return (
     <Container>
-      <Link href="/">
+      <Link to="/">
         <NoFound />
       </Link>
     </Container>
