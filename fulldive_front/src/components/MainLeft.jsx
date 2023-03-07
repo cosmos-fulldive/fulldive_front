@@ -1,30 +1,41 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-// import { useRouter } from "next/router";
+
 import { useSelector } from "react-redux";
-import { Routes } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+import Home from '../assets/images/house.svg'
+import Homeafter from '../assets/images/house_white.svg'
+import Stage from '../assets/images/stage.svg'
+import Stage_white from '../assets/images/stage_white.svg'
+import Artist from '../assets/images/artist.svg'
+import Artist_white from '../assets/images/artist_white.svg'
+import Setting from '../assets/images/setting.svg'
+import Setting_white from '../assets/images/setting_white.svg'
+
+
+
 
 const menus = [
   {
     id: 1,
     name: "홈",
-    imgUrl: "/images/house.svg",
-    nowImgUrl: "/images/house_white.svg",
+    imgUrl: Home,
+    nowImgUrl: Homeafter,
     pathname: "/",
   },
   {
     id: 2,
     name: "스테이지",
-    imgUrl: "/images/stage.svg",
-    nowImgUrl: "/images/stage_white.svg",
-    pathname: "/stage/liveStage",
+    imgUrl: Stage,
+    nowImgUrl: Stage_white,
+    pathname: "/stage",
   },
   {
     id: 3,
     name: "아티스트",
-    imgUrl: "/images/artist.svg",
-    nowImgUrl: "/images/artist_white.svg",
+    imgUrl: Artist,
+    nowImgUrl: Artist_white,
     pathname: "/artist",
   },
   // {
@@ -37,17 +48,17 @@ const menus = [
   {
     id: 5,
     name: "설정",
-    imgUrl: "/images/setting.svg",
-    nowImgUrl: "/images/setting_white.svg",
+    imgUrl: Setting,
+    nowImgUrl: Setting_white,
     pathname: "/setting/profile",
   },
-  {
-    id: 6,
-    name: "도움말",
-    imgUrl: "/images/flag.svg",
-    nowImgUrl: "/images/flag_white.svg",
-    pathname: "/help",
-  },
+  // {
+  //   id: 6,
+  //   name: "도움말",
+  //   imgUrl: "/images/flag.svg",
+  //   nowImgUrl: "/images/flag_white.svg",
+  //   pathname: "/help",
+  // },
 ];
 
 const company_setting_menus = [
@@ -116,7 +127,7 @@ const user_setting_menus = [
   {
     id: 1,
     name: "프로필",
-    imgUrl: "/images/setting/user.svg",
+    imgUrl: "../",
     nowImgUrl: "/images/setting/user_white.svg",
     pathname: "/setting/userProfile",
   },
@@ -144,8 +155,8 @@ const user_setting_menus = [
 ];
 
 const MainLeft = () => {
-  const router = Routes();
-  const { pathname } = router;
+  const location = useLocation();
+  const pathname  = location.pathname;
   const pathname_split = pathname.split("/")[1];
   const setting_pathname_split = pathname.split("/")[2];
   const token = useSelector((state) => state.Auth.token);
@@ -159,7 +170,7 @@ const MainLeft = () => {
         admin === "2" ? (
           <Nav>
             {user_setting_menus.map((menu, index) => (
-              <Link href={menu.pathname} key={index} legacyBehavior passHref>
+              <Link to={menu.pathname} key={index} legacyBehavior passHref>
                 <NavInfo
                   key={index}
                   imgUrl={menu.imgUrl}
@@ -174,7 +185,7 @@ const MainLeft = () => {
         ) : (
           <Nav>
             {company_setting_menus.map((menu, index) => (
-              <Link href={menu.pathname} key={index} legacyBehavior passHref>
+              <Link to={menu.pathname} key={index} legacyBehavior passHref>
                 <NavInfo
                   key={index}
                   imgUrl={menu.imgUrl}
@@ -190,7 +201,7 @@ const MainLeft = () => {
       ) : (
         <Nav>
           {menus.map((menu, index) => (
-            <Link href={menu.pathname} key={index} legacyBehavior passHref>
+            <Link to={menu.pathname} key={index} legacyBehavior passHref>
               <NavInfo key={index} imgUrl={menu.imgUrl} isHere={pathname_split === menu.pathname.split("/")[1]} nowImgUrl={menu.nowImgUrl}>
                 {menu.name}
               </NavInfo>
@@ -206,6 +217,7 @@ const Nav = styled.nav`
   position: fixed;
   padding-top: 100px;
   min-width: 250px;
+  top : 100px;
   height: 100%;
   background: #181820;
   padding: 10px 30px;

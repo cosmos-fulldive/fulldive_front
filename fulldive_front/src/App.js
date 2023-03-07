@@ -24,7 +24,7 @@ function App() {
           <Provider store={store}>
             <PersistGate persistor={persistor}>
               <MainTop />
-              {/* <MainLeft /> */}
+              <MainLeft />
               <Wrap>
                 <Routes>
                   <Route path="/" element={<Home />} />
