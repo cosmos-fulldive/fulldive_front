@@ -19,7 +19,8 @@ const MainTop = () => {
             <Link to="/">FullDive</Link>
           </Logo>
           <Search>
-            <SearchBar placeholder="검색어를 입력해주세요" />
+            {/* <SearchBar placeholder="검색어를 입력해주세요" /> */}
+            <div></div>
             <RightBar>
               {/* <div>
                 <img src="/images/more.svg" />
