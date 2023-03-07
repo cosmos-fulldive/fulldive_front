@@ -27,7 +27,7 @@ const SignupComplete = () => {
         <img src="/images/signup/complete.svg" width="100px" height="100px" />
         <div>가입완료</div>
         <p>Welcome to FullDive!</p>
-        <Link href="/" legacyBehavior passHref>
+        <Link href="/">
           <button>메인으로 이동</button>
         </Link>
       </Form>

@@ -167,7 +167,7 @@ const MainLeft = () => {
         admin === "2" ? (
           <Nav>
             {user_setting_menus.map((menu, index) => (
-              <Link to={menu.pathname} key={index} legacyBehavior passHref>
+              <Link to={menu.pathname} key={index}>
                 <NavInfo
                   key={index}
                   imgUrl={menu.imgUrl}
@@ -182,7 +182,7 @@ const MainLeft = () => {
         ) : (
           <Nav>
             {company_setting_menus.map((menu, index) => (
-              <Link to={menu.pathname} key={index} legacyBehavior passHref>
+              <Link to={menu.pathname} key={index}>
                 <NavInfo
                   key={index}
                   imgUrl={menu.imgUrl}
@@ -198,7 +198,7 @@ const MainLeft = () => {
       ) : (
         <Nav>
           {menus.map((menu, index) => (
-            <Link to={menu.pathname} key={index} legacyBehavior passHref>
+            <Link to={menu.pathname} key={index}>
               <NavInfo key={index} imgUrl={menu.imgUrl} isHere={pathname_split === menu.pathname.split("/")[1]} nowImgUrl={menu.nowImgUrl}>
                 {menu.name}
               </NavInfo>

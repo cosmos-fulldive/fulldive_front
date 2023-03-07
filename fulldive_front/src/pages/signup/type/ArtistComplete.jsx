@@ -27,7 +27,7 @@ const ArtistComplete = () => {
         <img src="/images/signup/complete.svg" width="100px" height="100px" />
         <div>가입 요청 완료</div>
         <p>가입 승인까지 영업일 기준 최대 3~5일이 소요됩니다.</p>
-        <Link href="/" legacyBehavior passHref>
+        <Link href="/">
           <button>메인으로 이동</button>
         </Link>
       </Form>

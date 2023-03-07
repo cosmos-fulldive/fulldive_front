@@ -263,7 +263,7 @@ const Stage = () => {
             </div>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" />
-              <ChatButton>{/* <img src="/images/stage/sendbutton.svg" /> */}</ChatButton>
+              <ChatButton></ChatButton>
             </label>
           </ChatBoxContainer>
         </Right>
