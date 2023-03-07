@@ -1,0 +1,12 @@
+[
+    {
+        "img" : "./korea.svg",
+        "name": "KR",
+        "code": "+82"
+    },
+    {
+        "img" : "./korea.svg",
+        "name": "JP",
+        "code": "+81"
+    }
+]

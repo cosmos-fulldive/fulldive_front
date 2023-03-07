@@ -124,7 +124,7 @@ const Home = () => {
   const [StageData, setStageData] = useState(null);
 
   const getStageData = async () => {
-    await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data));
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data));
   };
 
   return (

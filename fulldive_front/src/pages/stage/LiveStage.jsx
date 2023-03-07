@@ -28,7 +28,7 @@ const LiveStage = () => {
   const [StageData, setStageData] = useState(null);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
   }, []);
 
   console.log(StageData);

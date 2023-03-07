@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 import SHA256 from "../../sha256";
@@ -176,7 +176,7 @@ const Login = () => {
               };
               console.log(userData);
               try {
-                const { data } = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, userData);
+                const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/login`, userData);
                 data.responses === 200 && dispatch(setToken(data.jwt));
                 dispatch(setAdmin(data.admin));
                 navigate("/");
