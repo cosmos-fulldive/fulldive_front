@@ -20,96 +20,6 @@ const images = [
   },
 ];
 
-const artistData = [
-  {
-    id: 1,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 2,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 3,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 4,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 5,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 6,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-];
-
-const liveData = [
-  {
-    stageId: 1,
-    imgUrl: "/images/sample.png",
-    title: "공연제목",
-    artist: "공연 참여 아티스트",
-    ticket: "1장",
-    link: "/artist",
-    ticketImg: "/images/ticket.svg",
-  },
-  {
-    stageId: 2,
-    imgUrl: "/images/sample.png",
-    title: "공연제목",
-    artist: "공연 참여 아티스트",
-    ticket: "1장",
-    link: "/artist",
-    ticketImg: "/images/ticket.svg",
-  },
-  {
-    stageId: 3,
-    imgUrl: "/images/sample.png",
-    title: "공연제목",
-    artist: "공연 참여 아티스트",
-    ticket: "1장",
-    link: "/artist",
-    ticketImg: "/images/ticket.svg",
-  },
-  {
-    stageId: 4,
-    imgUrl: "/images/sample.png",
-    title: "공연제목",
-    artist: "공연 참여 아티스트",
-    ticket: "1장",
-    link: "/artist",
-    ticketImg: "/images/ticket.svg",
-  },
-];
-
 const Home = () => {
   // const stageData = useRecoilValue(getMainStageData);
   // const newData = useRecoilValue(getMainArtistData);
@@ -119,13 +29,21 @@ const Home = () => {
 
   useEffect(() => {
     getStageData();
+    // getArtistData();
   }, []);
 
   const [StageData, setStageData] = useState(null);
+  const [artistData, setArtistData] = useState(null);
 
   const getStageData = async () => {
-    await axios.get(`${process.env.REACT_APP_SERVER_URL}/main/mainInfo`).then((res) => setStageData(res.data));
+    await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
   };
+
+  const getArtistData = async () => {
+    await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
+  };
+
+  console.log(artistData);
 
   return (
     <Container>
@@ -152,7 +70,7 @@ const Home = () => {
           <a href="/artist">
             <Title>새로운 아티스트</Title>
           </a>
-          <SwiperLayout>
+          {/* <SwiperLayout>
             <Swiper className="artist-swiper" slidesPerView={6} spaceBetween={24} loop={true}>
               {artistData.map((artist, id) => (
                 <SwiperSlide key={id} className="swiper-slide">
@@ -160,7 +78,7 @@ const Home = () => {
                     <ImageArea src={artist.imgUrl} alt="artist" />
                   </Figure>
                   <ContentBox>
-                    <img src={artist.imgUrl} />
+                    <img src={artist.imgUrl} alt="artist" />
                     <div>
                       <p>{artist.name}</p>
                       <span>{artist.category}</span>
@@ -169,7 +87,7 @@ const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-          </SwiperLayout>
+          </SwiperLayout> */}
           <StageContainer>
             <a href="/stage">
               <Title>라이브 스테이지</Title>
@@ -188,14 +106,14 @@ const Home = () => {
                       </Figure>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} />
+                          <img src={data.stageThumbnailImage} alt="live_stage" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>
                           </div>
                         </div>
                         <Ticket>
-                          <img src="/images/ticket.svg" className="ticket" />
+                          <img src="/images/ticket.svg" className="ticket" alt="ticket" />
                           1장
                         </Ticket>
                       </StageContentBox>
@@ -218,14 +136,14 @@ const Home = () => {
                       </Figure>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} />
+                          <img src={data.stageThumbnailImage} alt="thumbnail" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>
                           </div>
                         </div>
                         <Ticket>
-                          <img src="/images/ticket.svg" className="ticket" />
+                          <img src="/images/ticket.svg" className="ticket" alt="ticket" />
                           1장
                         </Ticket>
                       </StageContentBox>
@@ -248,14 +166,14 @@ const Home = () => {
                       </Figure>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} />
+                          <img src={data.stageThumbnailImage} alt="thumbnail" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>
                           </div>
                         </div>
                         <Ticket>
-                          <img src="/images/ticket.svg" className="ticket" />
+                          <img src="/images/ticket.svg" className="ticket" alt="ticket" />
                           1장
                         </Ticket>
                       </StageContentBox>
