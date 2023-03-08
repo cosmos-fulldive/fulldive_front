@@ -121,7 +121,7 @@ const Stage = () => {
         <Left>
           <VideoContainer>
             <ReactPlayer
-              url={`${process.env.REACT_APP_RTMP_SERVER_URL}/1.flv`}
+              url={`http://118.63.182.3:8880/api/1.flv`}
               // #t=,00:01:00 <- 1분 미리보기
               muted={true}
               playing={true}
