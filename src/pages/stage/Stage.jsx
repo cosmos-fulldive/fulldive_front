@@ -63,36 +63,36 @@ const artistData = [
   },
 ];
 
-const shopping_item = [
-  {
-    id: 1,
-    imgUrl: "/images/ticket.svg",
-    name: "바니바니 당근당근",
-    company: "S&Y Group",
-    cost: "58,000",
-  },
-  {
-    id: 1,
-    imgUrl: "/images/ticket.svg",
-    name: "바니바니 당근당근",
-    company: "S&Y Group",
-    cost: "58,000",
-  },
-  {
-    id: 1,
-    imgUrl: "/images/ticket.svg",
-    name: "바니바니 당근당근",
-    company: "S&Y Group",
-    cost: "58,000",
-  },
-  {
-    id: 1,
-    imgUrl: "/images/ticket.svg",
-    name: "바니바니 당근당근",
-    company: "S&Y Group",
-    cost: "58,000",
-  },
-];
+// const shopping_item = [
+//   {
+//     id: 1,
+//     imgUrl: "/images/ticket.svg",
+//     name: "바니바니 당근당근",
+//     company: "S&Y Group",
+//     cost: "58,000",
+//   },
+//   {
+//     id: 1,
+//     imgUrl: "/images/ticket.svg",
+//     name: "바니바니 당근당근",
+//     company: "S&Y Group",
+//     cost: "58,000",
+//   },
+//   {
+//     id: 1,
+//     imgUrl: "/images/ticket.svg",
+//     name: "바니바니 당근당근",
+//     company: "S&Y Group",
+//     cost: "58,000",
+//   },
+//   {
+//     id: 1,
+//     imgUrl: "/images/ticket.svg",
+//     name: "바니바니 당근당근",
+//     company: "S&Y Group",
+//     cost: "58,000",
+//   },
+// ];
 
 const Stage = () => {
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -186,7 +186,7 @@ const Stage = () => {
         <Left>
           <VideoContainer>
             <ReactPlayer
-              url={`${process.env.REACT_APP_RTMP_SERVER_URL}/1.flv`}
+              url={`http://118.63.182.3:8880/api/1.flv`}
               // #t=,00:01:00 <- 1분 미리보기
               muted={true}
               playing={true}
@@ -242,7 +242,7 @@ const Stage = () => {
               ))}
             </Artist>
           </Wrap>
-          <Wrap>
+          {/* <Wrap>
             <div>추천상품</div>
             <Shop>
               {shopping_item.map((data, id) => (
@@ -256,7 +256,7 @@ const Stage = () => {
                 </div>
               ))}
             </Shop>
-          </Wrap>
+          </Wrap> */}
         </Left>
         <Right>
           <div>채팅</div>

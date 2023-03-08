@@ -6,8 +6,6 @@ import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-
 const Signup = () => {
   const [passwordType, setPasswordType] = useState({
     type: "password",
@@ -25,7 +23,7 @@ const Signup = () => {
   };
 
   const getEmail = () => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/join`).then(function (res) {
+    axios.get(`http://118.63.182.3:8880/api/user/join`).then(function (res) {
       // 성공 핸들링
       console.log(res);
     });
@@ -195,7 +193,7 @@ const Password = styled.input`
   }
 
   &.error {
-    border : 2px solid #FF2E2E;
+    border: 2px solid #ff2e2e;
   }
 `;
 
@@ -233,9 +231,9 @@ const Email = styled.input`
   border-radius: 100px;
   padding: 20px 40px 20px 60px;
   background: url("/images/login/email.svg") no-repeat 25px 50% #28282f;
- 
+
   &.error {
-    border : 2px solid #FF2E2E;
+    border: 2px solid #ff2e2e;
   }
 `;
 

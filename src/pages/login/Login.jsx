@@ -8,7 +8,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 
-
 // import liff from '@line/liff';
 // import { GoogleLogin } from "@react-oauth/google";
 // import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -164,7 +163,7 @@ const Login = () => {
               </div>
             </SocialLogin>
           </Top> */}
-          
+
           <Or>또는</Or>
 
           <Formik
@@ -179,7 +178,7 @@ const Login = () => {
               };
               console.log(userData);
               try {
-                const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/login`, userData);
+                const { data } = await axios.post(`http://118.63.182.3:8880/api/user/login`, userData);
                 data.responses === 200 && dispatch(setToken(data.jwt));
                 dispatch(setAdmin(data.admin));
                 navigate("/");
@@ -201,9 +200,7 @@ const Login = () => {
                   </EmailText>
 
                   <EmailForm>
-                    
                     <Email
-                    
                       onBlur={handleBlur}
                       className={errors.email && touched.email ? " error" : "none"}
                       name="email"
@@ -307,7 +304,7 @@ const Password = styled.input`
     background: url("/images/login/password_white.svg") no-repeat 25px 50% #28282f;
   }
   &.error {
-    border : 2px solid #FF2E2E;
+    border: 2px solid #ff2e2e;
   }
 `;
 
@@ -337,7 +334,7 @@ const Email = styled.input`
   }
 
   &.error {
-    border : 2px solid #FF2E2E;
+    border: 2px solid #ff2e2e;
   }
 `;
 

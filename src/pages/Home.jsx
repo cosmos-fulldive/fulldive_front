@@ -37,13 +37,14 @@ const Home = () => {
 
   const getStageData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
+    console.log(StageData);
   };
 
   const getArtistData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
 
-  console.log(artistData);
+  console.log(`${process.env.REACT_APP_SERVER_URL}`);
 
   return (
     <Container>
@@ -97,7 +98,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageStartInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <Live>
                           <Dot />
                           <p> Live</p>
@@ -131,7 +132,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageReadyInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <ImageArea src={data.stageThumbnailImage} alt="upcoming_stage" />
                       </Figure>
                       <StageContentBox>
@@ -161,7 +162,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageExitInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <ImageArea src={data.stageThumbnailImage} alt="gone_stage" />
                       </Figure>
                       <StageContentBox>
