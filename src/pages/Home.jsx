@@ -38,14 +38,11 @@ const Home = () => {
 
   const getStageData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
-    console.log(StageData);
   };
 
   const getArtistData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
-
-  console.log(artistData.artistList);
 
   return (
     <Container>
@@ -74,7 +71,7 @@ const Home = () => {
           </a>
           <SwiperLayout>
             <Swiper className="artist-swiper" slidesPerView={6} spaceBetween={24} loop={true}>
-              {artistData.artistList &&
+              {artistData &&
                 artistData.artistList.map((artist, id) => (
                   <SwiperSlide key={id} className="swiper-slide">
                     <Figure href="/artist" artist="artist">
