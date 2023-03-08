@@ -49,13 +49,15 @@ const LiveStage = () => {
           StageData.map((data, id) => (
             <>
               <StageBox>
-                <Figure to={data.imgUrl} artist="none">
-                  <Live>
-                    <Dot />
-                    <p> Live</p>
-                  </Live>
-                  <ImageArea src={data.imgUrl} alt="live_stage" />
-                </Figure>
+              <Link to={`/stage/${data.stageId}`} state={{ data: data }}>
+                        <Figure artist="none">
+                          <Live>
+                            <Dot />
+                            <p> Live</p>
+                          </Live>
+                          <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
+                        </Figure>
+                      </Link>
                 <StageContentBox>
                   <div>
                     <img src={data.imgUrl} />
