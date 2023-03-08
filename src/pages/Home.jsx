@@ -97,7 +97,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageStartInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <Live>
                           <Dot />
                           <p> Live</p>
@@ -131,7 +131,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageReadyInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <ImageArea src={data.stageThumbnailImage} alt="upcoming_stage" />
                       </Figure>
                       <StageContentBox>
@@ -161,7 +161,7 @@ const Home = () => {
                 {StageData &&
                   StageData.stageExitInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={data.stageStreamKey} artist="none">
+                      <Figure href={`stage/${data.stageId}`} artist="none">
                         <ImageArea src={data.stageThumbnailImage} alt="gone_stage" />
                       </Figure>
                       <StageContentBox>
