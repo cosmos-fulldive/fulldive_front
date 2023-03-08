@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
+import ArtistModal from "../components/modal/ArtistModal";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -35,6 +36,8 @@ const Home = () => {
 
   const [StageData, setStageData] = useState(null);
   const [artistData, setArtistData] = useState(null);
+  const [artistModalOpen, setArtistModalOpen] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState(null);
 
   const getStageData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
@@ -44,7 +47,15 @@ const Home = () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
 
-  console.log(StageData);
+  const openArtistModal = (artist) => {
+    setSelectedArtist(artist);
+    setArtistModalOpen(true);
+  };
+
+  const closeArtistModal = () => {
+    setArtistModalOpen(false);
+    setSelectedArtist(null);
+  };
 
   return (
     <Container>
@@ -76,7 +87,7 @@ const Home = () => {
               {artistData &&
                 artistData.artistList.map((artist, id) => (
                   <SwiperSlide key={id} className="swiper-slide">
-                    <Figure href="/artist" artist="artist">
+                    <Figure artist="artist" onClick={() => openArtistModal(artist)}>
                       <ImageArea src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} alt="artist" />
                     </Figure>
                     <ContentBox>
@@ -89,6 +100,7 @@ const Home = () => {
                   </SwiperSlide>
                 ))}
             </Swiper>
+            <ArtistModal visible={artistModalOpen} onClose={closeArtistModal} data={selectedArtist} />
           </SwiperLayout>
           <StageContainer>
             <a href="/stage">
@@ -168,7 +180,7 @@ const Home = () => {
                   StageData.stageExitInfo.map((data, id) => (
                     <SwiperSlide key={id}>
                       <Link to={`stage/${data.stageId}`} state={{ data: data }}>
-                        <Figure href={`stage/${data.stageId}`} artist="none">
+                        <Figure artist="none">
                           <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="gone_stage" />
                         </Figure>
                       </Link>

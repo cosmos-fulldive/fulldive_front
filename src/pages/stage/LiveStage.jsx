@@ -48,22 +48,22 @@ const LiveStage = () => {
         {StageData &&
           StageData.map((data, id) => (
             <>
-              <StageBox>
-              <Link to={`/stage/${data.stageId}`} state={{ data: data }}>
-                        <Figure artist="none">
-                          <Live>
-                            <Dot />
-                            <p> Live</p>
-                          </Live>
-                          <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
-                        </Figure>
-                      </Link>
+              <StageBox key={id}>
+                <Link to={`stage/${data.stageId}`} state={{ data: data }}>
+                  <Figure artist="none">
+                    <Live>
+                      <Dot />
+                      <p> Live</p>
+                    </Live>
+                    <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="live_stage" />
+                  </Figure>
+                </Link>
                 <StageContentBox>
                   <div>
-                    <img src={data.imgUrl} />
+                    <img src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} />
                     <div>
-                      <p>{data.title}</p>
-                      <span>{data.artist}</span>
+                      <p>{data.stageTitle}</p>
+                      <span>{data.artistId}</span>
                     </div>
                   </div>
                   <Ticket>
@@ -150,7 +150,7 @@ const ImageArea = styled.img`
   border-radius: 12px;
 `;
 
-const Figure = styled.a`
+const Figure = styled.div`
   display: block;
   position: relative;
   padding-bottom: 65%;
