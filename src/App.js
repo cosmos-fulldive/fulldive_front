@@ -23,6 +23,8 @@ import LiveStage from "./pages/stage/LiveStage.jsx";
 import UpcomingStage from "./pages/stage/UpcomingStage.jsx";
 import ExitStage from "./pages/stage/ExitStage.jsx";
 import Artist from "./pages/artist/Artist.jsx";
+import StudioInsert from "./pages/setting/StudioInsert.jsx";
+import Studio from "./pages/setting/Studio.jsx";
 
 const persistor = persistStore(store);
 
@@ -53,6 +55,8 @@ function App() {
                   <Route path="/signup/type/signupComplete" element={<SignupComplete />} />
                   <Route path="/signup/type/artistComplete" element={<ArtistComplete />} />
                   <Route path="/signup/type/artistComplete" element={<ArtistComplete />} />
+                  <Route path="/setting/studio" element={<Studio />} />
+                  <Route path="/setting/studio/studioInsert" element={<StudioInsert />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Wrap>

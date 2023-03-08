@@ -30,7 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     getStageData();
-    // getArtistData();
+    getArtistData();
   }, []);
 
   const [StageData, setStageData] = useState(null);
@@ -45,7 +45,7 @@ const Home = () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
 
-  console.log(`${process.env.REACT_APP_SERVER_URL}`);
+  console.log(artistData.artistList);
 
   return (
     <Container>
@@ -72,24 +72,25 @@ const Home = () => {
           <a href="/artist">
             <Title>새로운 아티스트</Title>
           </a>
-          {/* <SwiperLayout>
+          <SwiperLayout>
             <Swiper className="artist-swiper" slidesPerView={6} spaceBetween={24} loop={true}>
-              {artistData.map((artist, id) => (
-                <SwiperSlide key={id} className="swiper-slide">
-                  <Figure href="/artist" artist="artist">
-                    <ImageArea src={artist.imgUrl} alt="artist" />
-                  </Figure>
-                  <ContentBox>
-                    <img src={artist.imgUrl} alt="artist" />
-                    <div>
-                      <p>{artist.name}</p>
-                      <span>{artist.category}</span>
-                    </div>
-                  </ContentBox>
-                </SwiperSlide>
-              ))}
+              {artistData.artistList &&
+                artistData.artistList.map((artist, id) => (
+                  <SwiperSlide key={id} className="swiper-slide">
+                    <Figure href="/artist" artist="artist">
+                      <ImageArea src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} alt="artist" />
+                    </Figure>
+                    <ContentBox>
+                      <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} alt="artist" />
+                      <div>
+                        <p>{artist.artistName}</p>
+                        <span>{artist.artistCategory}</span>
+                      </div>
+                    </ContentBox>
+                  </SwiperSlide>
+                ))}
             </Swiper>
-          </SwiperLayout> */}
+          </SwiperLayout>
           <StageContainer>
             <a href="/stage">
               <Title>라이브 스테이지</Title>
