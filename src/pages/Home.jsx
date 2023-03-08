@@ -103,12 +103,12 @@ const Home = () => {
                             <Dot />
                             <p> Live</p>
                           </Live>
-                          <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
+                          <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="live_stage" />
                         </Figure>
                       </Link>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} alt="live_stage" />
+                          <img src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="live_stage" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>
@@ -133,12 +133,14 @@ const Home = () => {
                 {StageData &&
                   StageData.stageReadyInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={`stage/${data.stageId}`} artist="none">
-                        <ImageArea src={data.stageThumbnailImage} alt="upcoming_stage" />
-                      </Figure>
+                      <Link to={`stage/${data.stageId}`} state={{ data: data }}>
+                        <Figure href={`stage/${data.stageId}`} artist="none">
+                          <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="upcoming_stage" />
+                        </Figure>
+                      </Link>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} alt="thumbnail" />
+                          <img src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="thumbnail" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>
@@ -163,12 +165,14 @@ const Home = () => {
                 {StageData &&
                   StageData.stageExitInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={`stage/${data.stageId}`} artist="none">
-                        <ImageArea src={data.stageThumbnailImage} alt="gone_stage" />
-                      </Figure>
+                      <Link to={`stage/${data.stageId}`} state={{ data: data }}>
+                        <Figure href={`stage/${data.stageId}`} artist="none">
+                          <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="gone_stage" />
+                        </Figure>
+                      </Link>
                       <StageContentBox>
                         <div>
-                          <img src={data.stageThumbnailImage} alt="thumbnail" />
+                          <img src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="thumbnail" />
                           <div>
                             <p>{data.stageTitle}</p>
                             <span>{data.artistId}</span>

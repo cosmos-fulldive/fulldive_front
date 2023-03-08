@@ -168,7 +168,7 @@ const StudioInsert = () => {
     const insertData = {
       userId: "test",
       stageTitle: title,
-      stageImage: imgUrl.name.slice(0, -4),
+      stageImage: imgUrl.name,
       stageLocation: location,
       stageTimestamp: "2023-04-16 18:00:00",
       stageArtistId: artistId,
