@@ -6,6 +6,7 @@ import ShareModal from "../../components/modal/ShareModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
 import ReactPlayer from "react-player";
 import { useLocation } from "react-router-dom";
+import { w3cwebsocket as WebSocket } from "websocket";
 
 // const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 // const FlvNextPlayer = dynamic(() => import("@ztxtxwd/react-ts-flv-player/dist/ReactFlvPlayer"), {
@@ -99,6 +100,67 @@ const Stage = () => {
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
+
+  const [client, setClient] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const newClient = new WebSocket("ws://fulldive.live:8885/MilcomedaSocket?roomId=TestRoomId1,userId=test5");
+    newClient.onopen = () => {
+      console.log("WebSocket connected");
+    };
+    newClient.onmessage = (message) => {
+      const obj = JSON.parse(message.data);
+      console.log("WebSocket message received:", obj);
+      setMessages((prevMessages) => [...prevMessages, obj]);
+    };
+    setClient(newClient);
+
+    // 새로운 ChatBox 요소를 추가하는 함수
+    function addChatBox(obj) {
+      const container = document.querySelector("#chatContainer");
+
+      const chatBox = document.createElement("div");
+      chatBox.className = "ChatBox";
+
+      const img = document.createElement("img");
+      img.src = "/images/artist.svg";
+      chatBox.appendChild(img);
+
+      const innerDiv = document.createElement("div");
+      chatBox.appendChild(innerDiv);
+
+      const userDiv = document.createElement("div");
+      userDiv.className = "user";
+      userDiv.innerText = `${obj.type} ${obj.message}`;
+      innerDiv.appendChild(userDiv);
+
+      const messageDiv = document.createElement("div");
+      messageDiv.innerText = obj.message;
+      innerDiv.appendChild(messageDiv);
+
+      container.appendChild(chatBox);
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // 메시지를 받으면 ChatBox 추가 함수 호출
+    if (messages.length > 0) {
+      const obj = messages[messages.length - 1];
+      addChatBox(obj);
+    }
+  }, [messages]);
+
+  const sendMessage = () => {
+    let val = {
+      type: 1,
+      message: "일반메세지",
+    };
+
+    if (client.readyState === client.OPEN) {
+      client.send(JSON.stringify(val));
+    }
+  };
 
   const openShareModal = () => {
     setShareModalOpen(true);
@@ -200,61 +262,7 @@ const Stage = () => {
         <Right>
           <div>채팅</div>
           <ChatBoxContainer>
-            <div>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
+            <div id="chatContainer">
               <ChatBox>
                 <img src="/images/artist.svg" />
                 <div>
@@ -267,7 +275,7 @@ const Stage = () => {
             </div>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" />
-              <ChatButton></ChatButton>
+              <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
         </Right>
