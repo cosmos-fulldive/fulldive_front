@@ -193,7 +193,7 @@ const FavoriteMusic = () => {
       alert("You must check 3 checkboxes!");
     } else {
       try {
-        const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/join`, userInfo);
+        const { data } = await axios.post(`http://118.63.182.3:8880/user/join`, userInfo);
         console.log(data.response);
         data.response === 200 && window.alert("회원가입 성공");
         Router.push("/signup/type/signupComplete");
