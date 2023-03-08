@@ -43,7 +43,7 @@ const Home = () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
 
-  console.log(artistData);
+  console.log(`${process.env.REACT_APP_SERVER_URL}`);
 
   return (
     <Container>
