@@ -139,7 +139,7 @@ const ExitStage = () => {
   const [StageData, setStageData] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://118.63.182.3:8880/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
+    axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
   }, []);
 
   console.log(StageData);

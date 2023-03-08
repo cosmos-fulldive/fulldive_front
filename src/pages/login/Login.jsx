@@ -178,7 +178,7 @@ const Login = () => {
               };
               console.log(userData);
               try {
-                const { data } = await axios.post(`http://118.63.182.3:8880/user/login`, userData);
+                const { data } = await axios.post(`http://118.63.182.3:8880/api/user/login`, userData);
                 data.responses === 200 && dispatch(setToken(data.jwt));
                 dispatch(setAdmin(data.admin));
                 navigate("/");

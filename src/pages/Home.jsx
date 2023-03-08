@@ -37,6 +37,7 @@ const Home = () => {
 
   const getStageData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
+    console.log(StageData);
   };
 
   const getArtistData = async () => {

@@ -23,7 +23,7 @@ const Signup = () => {
   };
 
   const getEmail = () => {
-    axios.get(`http://118.63.182.3:8880/user/join`).then(function (res) {
+    axios.get(`http://118.63.182.3:8880/api/user/join`).then(function (res) {
       // 성공 핸들링
       console.log(res);
     });

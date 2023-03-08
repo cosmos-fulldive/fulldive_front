@@ -152,7 +152,7 @@ const studioInsert = () => {
       formData.append("photo", imgUrl);
 
       try {
-        const { data } = await axios.post(`http://118.63.182.3:8880/stage/stageImageInsert`, formData, {
+        const { data } = await axios.post(`http://118.63.182.3:8880/api/stage/stageImageInsert`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -180,7 +180,7 @@ const studioInsert = () => {
     };
 
     try {
-      const { data } = await axios.post(`http://118.63.182.3:8880/stage/stageInsert`, insertData);
+      const { data } = await axios.post(`http://118.63.182.3:8880/api/stage/stageInsert`, insertData);
       console.log(data.response);
       data.response === 200 && window.alert("공연 등록 성공");
       navigate("/setting/studio");
