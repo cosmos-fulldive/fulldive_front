@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const ExitStage = () => {
@@ -25,124 +25,11 @@ const ExitStage = () => {
     },
   ];
 
-  // const liveData = [
-  //   {
-  //     stageId: 1,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 2,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 3,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 4,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 5,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 6,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 7,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 8,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 9,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 10,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 11,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  //   {
-  //     stageId: 12,
-  //     imgUrl: "/images/sample.png",
-  //     title: "공연제목",
-  //     artist: "공연 참여 아티스트",
-  //     ticket: "1장",
-  //     link: "/artist",
-  //     ticketImg: "/images/ticket.svg",
-  //   },
-  // ];
-
   const [StageData, setStageData] = useState(null);
 
   useEffect(() => {
     axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data.stageStartInfo));
   }, []);
-
-  console.log(StageData);
 
   return (
     <Container>
@@ -159,13 +46,15 @@ const ExitStage = () => {
         {StageData &&
           StageData.map((data, id) => (
             <>
-              <StageBox>
-                <Figure to={data.stageStreamKey} artist="none">
-                  <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
-                </Figure>
+              <StageBox key={id}>
+                <Link to={`stage/${data.stageId}`} state={{ data: data }}>
+                  <Figure artist="none">
+                    <ImageArea src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} alt="live_stage" />
+                  </Figure>
+                </Link>
                 <StageContentBox>
                   <div>
-                    <img src={data.stageThumbnailImage} />
+                    <img src={`http://fulldive.live:8884/cosimg/_data/stage/${data.stageImage}`} />
                     <div>
                       <p>{data.stageTitle}</p>
                       <span>{data.artistId}</span>
@@ -226,7 +115,7 @@ const ImageArea = styled.img`
   border-radius: 12px;
 `;
 
-const Figure = styled.a`
+const Figure = styled.div`
   display: block;
   position: relative;
   padding-bottom: 65%;
