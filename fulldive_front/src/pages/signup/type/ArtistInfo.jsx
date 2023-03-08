@@ -23,7 +23,6 @@ const menus = [
 ];
 
 const ArtistInfo = () => {
-
   const navigate = useNavigate();
 
   const userInfo = {
@@ -168,7 +167,6 @@ const ArtistInfo = () => {
                 onChange={onChangeValues}
               />
             </Individual>
-
             {/* 성별 */}
             <Individual>
               <div>성별</div>
