@@ -180,6 +180,10 @@ const Stage = () => {
   };
 
   console.log(location.state.data);
+  
+  console.log(location.state.data.stageStreamKey);
+
+  const StrKey = 123
 
   return (
     <Fragment>
@@ -187,7 +191,7 @@ const Stage = () => {
         <Left>
           <VideoContainer>
             <ReactPlayer
-              url={`http://118.63.182.3:8880/api/1.flv`}
+              url={` http://fulldive.live:8883/live/${StrKey}/index.m3u8`}
               // #t=,00:01:00 <- 1분 미리보기
               muted={true}
               playing={true}

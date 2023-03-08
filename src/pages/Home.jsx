@@ -44,6 +44,8 @@ const Home = () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
 
+  console.log(StageData);
+
   return (
     <Container>
       <React.Suspense fallback={<div>Loading...</div>}>
