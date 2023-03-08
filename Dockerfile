@@ -15,7 +15,7 @@ COPY . .
 # npm install과 COPY . . 를 동시에 수행하면
 # 소스 코드가 조금 달라질때도 항상 npm install을 수행해서 리소스가 낭비된다.
 
-RUN ls /app/media/live
+#RUN ls /app/media/live
 
 # 3000번 포트 노출
 EXPOSE 3000
