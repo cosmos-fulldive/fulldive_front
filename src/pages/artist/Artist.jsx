@@ -1,155 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-const artists = [
-  {
-    id: 1,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/artist.png",
-    name: "아이유",
-    category: "메탈, 발라드",
-    link: "",
-  },
-  {
-    id: 2,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 3,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 4,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 5,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 6,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 7,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 8,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 9,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 10,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 11,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 12,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 13,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 14,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 15,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 16,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 17,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-  {
-    id: 18,
-    imgUrl: "/images/artist.png",
-    artist_img: "/images/sample.png",
-    name: "아이유",
-    category: "장르",
-    link: "",
-  },
-];
+import axios from "axios";
 
 const Artist = () => {
+  const [artistData, setArtistData] = useState(null);
+
+  useEffect(() => {
+    getArtistData();
+  }, []);
+
+  const getArtistData = async () => {
+    await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
+  };
+
   return (
     <Container>
       <Top>
@@ -157,24 +21,30 @@ const Artist = () => {
         <div>정렬</div>
       </Top>
       <Main>
-        {artists.map((artist, index) => (
+        {artistData &&
+          artistData.artistList.map((artist, index) => (
             <ArtistWrapper>
-          <Link to={artist.link} key={index}>
-              <img src={artist.imgUrl} width="100%" />
-              <Description>
-                <img src={artist.artist_img} width="30px" height="30px" />
-                <div>
-                  {artist.name}
-                  <p>{artist.category}</p>
-                </div>
-              </Description>
-          </Link>
+              <Link to={artist.link} key={index}>
+                <ArtistImage src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="100%" />
+                <Description>
+                  <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="30px" height="30px" />
+                  <div>
+                    {artist.artistName}
+                    <p>{artist.artistCategory}</p>
+                  </div>
+                </Description>
+              </Link>
             </ArtistWrapper>
-        ))}
+          ))}
       </Main>
     </Container>
   );
 };
+
+const ArtistImage = styled.img`
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+`;
 
 const Description = styled.div`
   display: flex;
