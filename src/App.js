@@ -38,7 +38,7 @@ function App() {
               <Wrap>
                 <Routes>
                   <Route path="/" element={<Home />} />
-                  <Route path="/stage" element={<Stage />} />
+                  <Route path="/stage/:index" element={<Stage />} />
                   <Route path="/stage/liveStage" element={<LiveStage />} />
                   <Route path="/stage/upcomingStage" element={<UpcomingStage />} />
                   <Route path="/stage/exitStage" element={<ExitStage />} />
@@ -51,6 +51,7 @@ function App() {
                   <Route path="/signup/type/artistInfo" element={<ArtistInfo />} />
                   {/* <Route path="/signup/type/favoriteMusic" element={<FavoriteMusic />} /> */}
                   <Route path="/signup/type/signupComplete" element={<SignupComplete />} />
+                  <Route path="/signup/type/artistComplete" element={<ArtistComplete />} />
                   <Route path="/signup/type/artistComplete" element={<ArtistComplete />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

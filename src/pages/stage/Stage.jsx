@@ -5,6 +5,7 @@ import axios from "axios";
 import ShareModal from "../../components/modal/ShareModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
 import ReactPlayer from "react-player";
+import { useLocation } from "react-router-dom";
 
 // const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 // const FlvNextPlayer = dynamic(() => import("@ztxtxwd/react-ts-flv-player/dist/ReactFlvPlayer"), {
@@ -94,6 +95,7 @@ const artistData = [
 // ];
 
 const Stage = () => {
+  const location = useLocation();
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -114,6 +116,8 @@ const Stage = () => {
   const handleProgress = (secs) => {
     setSeconds(secs);
   };
+
+  console.log(location.state.data);
 
   return (
     <Fragment>

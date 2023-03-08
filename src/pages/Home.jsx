@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import SwiperCore, { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -98,13 +99,15 @@ const Home = () => {
                 {StageData &&
                   StageData.stageStartInfo.map((data, id) => (
                     <SwiperSlide key={id}>
-                      <Figure href={`stage/${data.stageId}`} artist="none">
-                        <Live>
-                          <Dot />
-                          <p> Live</p>
-                        </Live>
-                        <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
-                      </Figure>
+                      <Link to={`stage/${data.stageId}`} state={{ data: data }}>
+                        <Figure artist="none">
+                          <Live>
+                            <Dot />
+                            <p> Live</p>
+                          </Live>
+                          <ImageArea src={data.stageThumbnailImage} alt="live_stage" />
+                        </Figure>
+                      </Link>
                       <StageContentBox>
                         <div>
                           <img src={data.stageThumbnailImage} alt="live_stage" />
@@ -282,7 +285,7 @@ const ImageArea = styled.img`
   border-radius: 12px;
 `;
 
-const Figure = styled.a`
+const Figure = styled.div`
   display: block;
   position: relative;
   padding-bottom: 58%;
