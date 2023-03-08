@@ -158,8 +158,8 @@ const Artist = () => {
       </Top>
       <Main>
         {artists.map((artist, index) => (
-          <Link to={artist.link} key={index}>
             <ArtistWrapper>
+          <Link to={artist.link} key={index}>
               <img src={artist.imgUrl} width="100%" />
               <Description>
                 <img src={artist.artist_img} width="30px" height="30px" />
@@ -168,8 +168,8 @@ const Artist = () => {
                   <p>{artist.category}</p>
                 </div>
               </Description>
-            </ArtistWrapper>
           </Link>
+            </ArtistWrapper>
         ))}
       </Main>
     </Container>
