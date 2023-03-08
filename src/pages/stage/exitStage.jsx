@@ -25,6 +25,7 @@ const ExitStage = () => {
     },
   ];
 
+  
   // const liveData = [
   //   {
   //     stageId: 1,
