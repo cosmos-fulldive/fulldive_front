@@ -1,29 +1,6 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 
-const icons = [
-  {
-    id: 1,
-    imgUrl: "/images/stage/instagram.svg",
-  },
-  {
-    id: 2,
-    imgUrl: "/images/stage/twitter.svg",
-  },
-  {
-    id: 3,
-    imgUrl: "/images/stage/facebook.svg",
-  },
-  {
-    id: 4,
-    imgUrl: "/images/stage/kakao.svg",
-  },
-  {
-    id: 5,
-    imgUrl: "/images/stage/line.svg",
-  },
-];
-
 const ArtistModal = ({ data, visible, onClose }) => {
   if (!visible) {
     return null;
@@ -42,7 +19,7 @@ const ArtistModal = ({ data, visible, onClose }) => {
           <div>아티스트</div>
           <Wrap>
             <div>
-              <img src={`http://fulldive.live:8881/artist_images/${data.artistImage}`} />
+              <img src={`http://fulldive.live:8881/artist_images/${data.artistImage}`} alt="artist" />
             </div>
             <div>
               {data.artistName}
