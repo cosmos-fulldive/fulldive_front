@@ -13,56 +13,56 @@ import { w3cwebsocket as WebSocket } from "websocket";
 //   ssr: false,
 // });
 
-const artistData = [
-  {
-    id: 1,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 2,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "김아무개입니다",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 3,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 4,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 5,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-  {
-    id: 6,
-    imgUrl: "/images/artist.png",
-    profile: "/images/sample.png",
-    name: "아이유",
-    category: "발라드, 팝송",
-    link: "/artist",
-  },
-];
+// const artistData = [
+//   {
+//     id: 1,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "아이유",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+//   {
+//     id: 2,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "김아무개입니다",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+//   {
+//     id: 3,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "아이유",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+//   {
+//     id: 4,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "아이유",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+//   {
+//     id: 5,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "아이유",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+//   {
+//     id: 6,
+//     imgUrl: "/images/artist.png",
+//     profile: "/images/sample.png",
+//     name: "아이유",
+//     category: "발라드, 팝송",
+//     link: "/artist",
+//   },
+// ];
 
 // const shopping_item = [
 //   {
@@ -180,6 +180,10 @@ const Stage = () => {
   };
 
   console.log(location.state.data);
+  
+  console.log(location.state.data.stageStreamKey);
+
+  const StrKey = 123
 
   return (
     <Fragment>
@@ -187,7 +191,7 @@ const Stage = () => {
         <Left>
           <VideoContainer>
             <ReactPlayer
-              url={`http://118.63.182.3:8880/api/1.flv`}
+              url={` http://fulldive.live:8883/live/${StrKey}/index.m3u8`}
               // #t=,00:01:00 <- 1분 미리보기
               muted={true}
               playing={true}
@@ -204,14 +208,15 @@ const Stage = () => {
             />
           </VideoContainer>
           <Title>
-            <div>
-              <p>지킬 앤 하이드</p>
-              <button style={parseFloat(seconds) > 60 ? { display: "none" } : {}}>asd</button>
-              <span>
-                실시간 시청자 수 <span>00명</span>
-              </span>
-            </div>
+            <TitleText>
+              <p>{location.state.data.stageTitle}</p>
+              {/* <button style={parseFloat(seconds) > 60 ? { display: "none" } : {}}>asd</button> */}
+            </TitleText>
+           
             <ButtonWrap>
+            <span>
+                시청자 수 <span>00명</span>
+              </span>
               <button onClick={openShareModal}>공유</button>
               <ShareModal visible={shareModalOpen} onClose={closeShareModal} />
               <button onClick={openDeclarationModal}>신고</button>
@@ -220,27 +225,27 @@ const Stage = () => {
           </Title>
           <ContentBox>
             <img src="/images/artist.svg" />
-            <div>공연 기획자</div>
+            <div>{location.state.data.stageTitle}</div>
           </ContentBox>
           <Description>
             <div className="date">
               <div>공연 날짜 및 시간</div>
-              <p>2022. 12. 01. 목요일 18:00 - 20:00 (120분)</p>
+              <p>{location.state.data.stageTimestamp}</p>
             </div>
             <div>
-              <div>공연 장소</div>
-              <p>서울시 관악구 서울대입구 우리집 집주소 515-12</p>
+              <div>공연 설명</div>
+              <p>{location.state.data.stageDescription}</p>
             </div>
           </Description>
           <Wrap>
             <div>참여 아티스트</div>
             <Artist>
-              {artistData.map((artist, id) => (
-                <div key={id}>
-                  <img src={artist.imgUrl} />
-                  <p>{artist.name}</p>
+              
+                <div>
+                  <img src="/images/artist.png" />
+                  <p>{location.state.data.stageArtistId}</p>
                 </div>
-              ))}
+              
             </Artist>
           </Wrap>
           {/* <Wrap>
@@ -410,8 +415,10 @@ const Wrap = styled.div`
 `;
 
 const Description = styled.div`
-  display: flex;
-  margin-top: 24px;
+      display: flex;
+    margin-top: 24px;
+    flex-direction: column;
+    gap: 24px;
   > div {
     &.date {
       margin-right: 30px;
@@ -443,7 +450,7 @@ const ContentBox = styled.div`
 const ButtonWrap = styled.div`
   font-size: 1rem;
   > button {
-    background: #273dff;
+    background: #191922;
     margin-left: 12px;
     border-radius: 100px;
     padding: 6px 24px;
@@ -471,6 +478,10 @@ const Title = styled.div`
     }
   }
 `;
+
+const TitleText = styled.div`
+
+`
 
 const VideoContainer = styled.div`
   width: 100%;
