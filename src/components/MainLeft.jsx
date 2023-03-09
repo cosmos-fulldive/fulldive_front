@@ -238,6 +238,8 @@ const NavInfo = styled.a`
     color: #ffffff;
     ${(props) => `background: url(${props.nowImgUrl}) no-repeat left 50%;`}
   }
+
+  
 `;
 
 export default MainLeft;
