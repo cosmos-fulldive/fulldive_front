@@ -38,7 +38,7 @@ const Artist = () => {
             <ArtistWrapper onClick={() => openArtistModal(artist)}>
               <ArtistImage src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="100%" />
               <Description>
-                <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="30px" height="30px" />
+                <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} alt="artist" width="30px" height="30px" />
                 <div>
                   {artist.artistName}
                   <p>{artist.artistCategory}</p>

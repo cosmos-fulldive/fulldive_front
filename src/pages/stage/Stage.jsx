@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 // import queryString from "query-string";
@@ -103,6 +103,17 @@ const Stage = () => {
 
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [chat, setChat] = useState("");
+  const now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  const currentTime = ampm + " " + hours + ":" + minutes;
 
   useEffect(() => {
     const newClient = new WebSocket("ws://fulldive.live:8885/MilcomedaSocket?roomId=TestRoomId1,userId=test5");
@@ -111,7 +122,7 @@ const Stage = () => {
     };
     newClient.onmessage = (message) => {
       const obj = JSON.parse(message.data);
-      console.log("WebSocket message received:", obj);
+      // console.log("WebSocket message received:", obj);
       setMessages((prevMessages) => [...prevMessages, obj]);
     };
     setClient(newClient);
@@ -120,29 +131,32 @@ const Stage = () => {
     function addChatBox(obj) {
       const container = document.querySelector("#chatContainer");
 
-      const chatBox = document.createElement("div");
-      chatBox.className = "ChatBox";
+      // const chatBox = document.createElement("div");
+      // chatBox.className = "ChatBox";
+      // // chatBox.className = "ChatBox";
 
-      const img = document.createElement("img");
-      img.src = "/images/artist.svg";
-      chatBox.appendChild(img);
+      // const img = document.createElement("img");
+      // img.src = "/images/artist.svg";
+      // chatBox.appendChild(img);
 
-      const innerDiv = document.createElement("div");
-      chatBox.appendChild(innerDiv);
+      // const innerDiv = document.createElement("div");
+      // chatBox.appendChild(innerDiv);
 
-      const userDiv = document.createElement("div");
-      userDiv.className = "user";
-      userDiv.innerText = `${obj.type} ${obj.message}`;
-      innerDiv.appendChild(userDiv);
+      // const userDiv = document.createElement("div");
+      // userDiv.className = "user";
+      // userDiv.innerText = `${obj.type} ${obj.message}`;
+      // innerDiv.appendChild(userDiv);
 
-      const messageDiv = document.createElement("div");
-      messageDiv.innerText = obj.message;
-      innerDiv.appendChild(messageDiv);
+      // const messageDiv = document.createElement("div");
+      // messageDiv.innerText = obj.message;
+      // innerDiv.appendChild(messageDiv);
 
-      container.appendChild(chatBox);
+      // container.appendChild(chatBox);
 
       container.scrollTop = container.scrollHeight;
     }
+
+    console.log(messages);
 
     // 메시지를 받으면 ChatBox 추가 함수 호출
     if (messages.length > 0) {
@@ -154,7 +168,7 @@ const Stage = () => {
   const sendMessage = () => {
     let val = {
       type: 1,
-      message: "일반메세지",
+      message: chat,
     };
 
     if (client.readyState === client.OPEN) {
@@ -180,10 +194,21 @@ const Stage = () => {
   };
 
   console.log(location.state.data);
-  
+
   console.log(location.state.data.stageStreamKey);
 
-  const StrKey = 123
+  const StrKey = 123;
+
+  const onChange = (e) => {
+    setChat(e.target.value);
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key == "Enter") {
+      sendMessage();
+      setChat("");
+    }
+  };
 
   return (
     <Fragment>
@@ -212,9 +237,8 @@ const Stage = () => {
               <p>{location.state.data.stageTitle}</p>
               {/* <button style={parseFloat(seconds) > 60 ? { display: "none" } : {}}>asd</button> */}
             </TitleText>
-           
             <ButtonWrap>
-            <span>
+              <span>
                 시청자 수 <span>00명</span>
               </span>
               <button onClick={openShareModal}>공유</button>
@@ -240,12 +264,10 @@ const Stage = () => {
           <Wrap>
             <div>참여 아티스트</div>
             <Artist>
-              
-                <div>
-                  <img src="/images/artist.png" />
-                  <p>{location.state.data.stageArtistId}</p>
-                </div>
-              
+              <div>
+                <img src="/images/artist.png" />
+                <p>{location.state.data.stageArtistId}</p>
+              </div>
             </Artist>
           </Wrap>
           {/* <Wrap>
@@ -268,19 +290,22 @@ const Stage = () => {
           <div>채팅</div>
           <ChatBoxContainer>
             <div id="chatContainer">
-              <ChatBox>
-                <img src="/images/artist.svg" />
-                <div>
-                  <div className="user">
-                    sangyeon Kim<span>AM 11:00</span>
-                  </div>
-                  <div>Goooooooooooooood!</div>
-                </div>
-              </ChatBox>
+              {messages &&
+                messages.map((msg, index) => (
+                  <ChatBox>
+                    <img src="/images/artist.svg" />
+                    <div>
+                      <div className="user">
+                        sangyeon Kim<span>{currentTime}</span>
+                      </div>
+                      <div>{msg.message}</div>
+                    </div>
+                  </ChatBox>
+                ))}
             </div>
             <label>
-              <Chatting placeholder="메세지를 입력해주세요" />
-              <img src="/images/artist.svg" />
+              <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
+              {/* <img src="/images/artist.svg" /> */}
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
@@ -416,10 +441,10 @@ const Wrap = styled.div`
 `;
 
 const Description = styled.div`
-      display: flex;
-    margin-top: 24px;
-    flex-direction: column;
-    gap: 24px;
+  display: flex;
+  margin-top: 24px;
+  flex-direction: column;
+  gap: 24px;
   > div {
     &.date {
       margin-right: 30px;
@@ -480,9 +505,7 @@ const Title = styled.div`
   }
 `;
 
-const TitleText = styled.div`
-
-`
+const TitleText = styled.div``;
 
 const VideoContainer = styled.div`
   width: 100%;
