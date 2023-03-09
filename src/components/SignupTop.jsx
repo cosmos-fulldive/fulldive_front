@@ -1,7 +1,7 @@
-import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import { Link } from "react-router-dom";
 
 const SignupTop = () => {
   const router = useRouter();
@@ -41,7 +41,7 @@ const SignupTop = () => {
   return (
     <Nav>
       {menus.map((menu, index) => (
-        <Link href={menu.pathname} key={index}>
+        <Link to={menu.pathname} key={index}>
           <NavInfo key={index} imgUrl={menu.imgUrl} isHere={pathname === menu.pathname} nowImgUrl={menu.nowImgUrl}>
             {menu.name}
           </NavInfo>

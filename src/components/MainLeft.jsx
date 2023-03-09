@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-
 const menus = [
   {
     id: 1,
@@ -152,13 +151,13 @@ const MainLeft = () => {
   const token = useSelector((state) => state.Auth.token);
   const admin = useSelector((state) => state.Auth.admin);
 
-  
+  console.log(location.pathname);
 
   return (
     <>
       {token === "Test" && pathname_split === "setting" ? (
         admin === "2" ? (
-          <Nav>
+          <Nav location={location.pathname}>
             {user_setting_menus.map((menu, index) => (
               <Link to={menu.pathname} key={index}>
                 <NavInfo
@@ -173,7 +172,7 @@ const MainLeft = () => {
             ))}
           </Nav>
         ) : (
-          <Nav>
+          <Nav location={location.pathname}>
             {company_setting_menus.map((menu, index) => (
               <Link to={menu.pathname} key={index}>
                 <NavInfo
@@ -189,7 +188,7 @@ const MainLeft = () => {
           </Nav>
         )
       ) : (
-        <Nav>
+        <Nav location={location.pathname}>
           {menus.map((menu, index) => (
             <Link to={menu.pathname} key={index}>
               <NavInfo key={index} imgUrl={menu.imgUrl} isHere={pathname_split === menu.pathname.split("/")[1]} nowImgUrl={menu.nowImgUrl}>
@@ -214,6 +213,7 @@ const Nav = styled.nav`
   color: #878787;
   display: flex;
   flex-direction: column;
+  ${(props) => props.location === "/setting/admin" && `display: none;`}
 `;
 
 const NavInfo = styled.a`
@@ -238,8 +238,6 @@ const NavInfo = styled.a`
     color: #ffffff;
     ${(props) => `background: url(${props.nowImgUrl}) no-repeat left 50%;`}
   }
-
-  
 `;
 
 export default MainLeft;

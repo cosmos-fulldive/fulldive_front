@@ -13,57 +13,6 @@ import { w3cwebsocket as WebSocket } from "websocket";
 //   ssr: false,
 // });
 
-// const artistData = [
-//   {
-//     id: 1,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "아이유",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-//   {
-//     id: 2,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "김아무개입니다",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-//   {
-//     id: 3,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "아이유",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-//   {
-//     id: 4,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "아이유",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-//   {
-//     id: 5,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "아이유",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-//   {
-//     id: 6,
-//     imgUrl: "/images/artist.png",
-//     profile: "/images/sample.png",
-//     name: "아이유",
-//     category: "발라드, 팝송",
-//     link: "/artist",
-//   },
-// ];
-
 // const shopping_item = [
 //   {
 //     id: 1,
@@ -116,7 +65,7 @@ const Stage = () => {
   const currentTime = ampm + " " + hours + ":" + minutes;
 
   useEffect(() => {
-    const newClient = new WebSocket("ws://fulldive.live:8885/MilcomedaSocket?roomId=TestRoomId1,userId=test5");
+    const newClient = new WebSocket(`ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=test5`);
     newClient.onopen = () => {
       console.log("WebSocket connected");
     };
@@ -156,8 +105,6 @@ const Stage = () => {
       container.scrollTop = container.scrollHeight;
     }
 
-    console.log(messages);
-
     // 메시지를 받으면 ChatBox 추가 함수 호출
     if (messages.length > 0) {
       const obj = messages[messages.length - 1];
@@ -192,10 +139,6 @@ const Stage = () => {
   const handleProgress = (secs) => {
     setSeconds(secs);
   };
-
-  console.log(location.state.data);
-
-  console.log(location.state.data.stageStreamKey);
 
   const StrKey = 123;
 
