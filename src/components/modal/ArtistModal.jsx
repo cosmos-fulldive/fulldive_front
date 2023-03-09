@@ -42,7 +42,7 @@ const ArtistModal = ({ data, visible, onClose }) => {
           <div>아티스트</div>
           <Wrap>
             <div>
-              <img src={`http://fulldive.live:8881/artist_images/${data.artistImage}`} />
+              <img src={`http://fulldive.live:8881/artist_images/${data.artistImage}`}/>
             </div>
             <div>
               {data.artistName}

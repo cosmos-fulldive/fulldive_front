@@ -280,6 +280,7 @@ const Stage = () => {
             </div>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" />
+              <img src="/images/artist.svg" />
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
