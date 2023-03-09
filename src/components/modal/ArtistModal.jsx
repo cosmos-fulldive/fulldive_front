@@ -24,12 +24,11 @@ const icons = [
   },
 ];
 
-const ArtistModal = ({ children, data, visible, onClose }) => {
+const ArtistModal = ({ data, visible, onClose }) => {
   if (!visible) {
     return null;
   }
 
-  const text = window.location.href;
   console.log(data);
 
   return (
@@ -40,31 +39,44 @@ const ArtistModal = ({ children, data, visible, onClose }) => {
           <CloseButton type="button" onClick={onClose}></CloseButton>
         </Close>
         <Content>
-          <div>공유하기</div>
-          <p>링크(URL) 복사하기</p>
-          <div className="copyInput">
-            <div>{window.location.href}</div>
-            <button onClick={() => navigator.clipboard.writeText(text)}>복사하기</button>
-          </div>
-          <div>SNS로 공유하기</div>
-          <Icons>
-            {icons.map((icon, id) => (
-              <div key={id}>
-                <img src={icon.imgUrl} />
-              </div>
-            ))}
-          </Icons>
-          {children}
+          <div>아티스트</div>
+          <Wrap>
+            <div>
+              <img src={`http://fulldive.live:8881/artist_images/${data.artistImage}`} />
+            </div>
+            <div>
+              {data.artistName}
+              <p>{data.artistCategory}카테고리</p>
+            </div>
+          </Wrap>
+          <Description>{data.artistDescription}</Description>
         </Content>
       </ModalSection>
     </>
   );
 };
 
-const Icons = styled.div`
+const Description = styled.div`
+  text-align: initial;
+  margin-top: 20px;
+`;
+
+const Wrap = styled.div`
+  text-align: initial;
+  margin-top: 20px;
   display: flex;
-  justify-content: space-evenly;
-  margin-top: 25px;
+  > div {
+    &:nth-child(1) {
+      margin-right: 20px;
+    }
+    > img {
+      border-radius: 12px;
+    }
+    > p {
+      color: #acacac;
+      margin-top: 30px;
+    }
+  }
 `;
 
 const modalSettings = (visible) => css`
@@ -86,7 +98,6 @@ const Background = styled.div`
 
 const ModalSection = styled.div`
   width: 35%;
-  height: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -108,32 +119,6 @@ const Close = styled.div`
 
 const Content = styled.div`
   padding: 0 11px 16px 11px;
-  > p {
-    margin-top: 18px;
-    margin-bottom: 6px;
-    font-size: 0.875rem;
-    text-align: initial;
-  }
-  > div {
-    &.copyInput {
-      display: flex;
-      font-size: 1rem;
-      margin-bottom: 24px;
-      > div {
-        max-width: 325px;
-        font-size: 1rem;
-        padding: 15px 24px;
-        border: 2px solid #202eae;
-        border-radius: 120px;
-        margin-right: 12px;
-      }
-      > button {
-        padding: 14px 36px;
-        background: #273dff;
-        border-radius: 100px;
-      }
-    }
-  }
 `;
 
 const CloseButton = styled.button`

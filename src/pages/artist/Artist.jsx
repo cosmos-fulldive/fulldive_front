@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import ArtistModal from "../../components/modal/ArtistModal";
 
 const Artist = () => {
   const [artistData, setArtistData] = useState(null);
+  const [artistModalOpen, setArtistModalOpen] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState(null);
 
   useEffect(() => {
     getArtistData();
@@ -12,6 +14,16 @@ const Artist = () => {
 
   const getArtistData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
+  };
+
+  const openArtistModal = (artist) => {
+    setSelectedArtist(artist);
+    setArtistModalOpen(true);
+  };
+
+  const closeArtistModal = () => {
+    setArtistModalOpen(false);
+    setSelectedArtist(null);
   };
 
   return (
@@ -23,19 +35,18 @@ const Artist = () => {
       <Main>
         {artistData &&
           artistData.artistList.map((artist, index) => (
-            <ArtistWrapper>
-              <Link to={artist.link} key={index}>
-                <ArtistImage src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="100%" />
-                <Description>
-                  <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="30px" height="30px" />
-                  <div>
-                    {artist.artistName}
-                    <p>{artist.artistCategory}</p>
-                  </div>
-                </Description>
-              </Link>
+            <ArtistWrapper onClick={() => openArtistModal(artist)}>
+              <ArtistImage src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="100%" />
+              <Description>
+                <img src={`http://fulldive.live:8881/artist_images/${artist.artistImage}`} width="30px" height="30px" />
+                <div>
+                  {artist.artistName}
+                  <p>{artist.artistCategory}</p>
+                </div>
+              </Description>
             </ArtistWrapper>
           ))}
+        <ArtistModal visible={artistModalOpen} onClose={closeArtistModal} data={selectedArtist} />
       </Main>
     </Container>
   );
@@ -67,6 +78,7 @@ const ArtistWrapper = styled.div`
   margin-bottom: 12px;
   border-radius: 12px;
   background: #21212b;
+  cursor: pointer;
 `;
 
 const Main = styled.div`

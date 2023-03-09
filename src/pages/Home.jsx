@@ -306,6 +306,7 @@ const Figure = styled.div`
   position: relative;
   padding-bottom: 58%;
   width: 100%;
+  cursor: pointer;
   ${(props) => props.artist === "artist" && `padding-bottom: 90%`}
 `;
 
