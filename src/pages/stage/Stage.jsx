@@ -205,7 +205,7 @@ const Stage = () => {
 
   console.log(location.state.data.stageStreamKey);
 
-  const StrKey = location.state.data.stageId;
+  const StrKey = location.state.data.stageStreamKey;
 
   const onChange = (e) => {
     setChat(e.target.value);
