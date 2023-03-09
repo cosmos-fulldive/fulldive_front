@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 // import queryString from "query-string";
 import ShareModal from "../../components/modal/ShareModal";
+import DonationModal from "../../components/modal/DonationModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
 import ReactPlayer from "react-player";
 import { useLocation } from "react-router-dom";
@@ -98,6 +99,7 @@ import { w3cwebsocket as WebSocket } from "websocket";
 const Stage = () => {
   const location = useLocation();
   const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [DonationModalOpen, setDonationModalOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
@@ -188,6 +190,12 @@ const Stage = () => {
   const closeDeclarationModal = () => {
     setDeclareModalOpen(false);
   };
+  const openDonationModal = () => {
+    setDonationModalOpen(true);
+  };
+  const closeDonationModal = () => {
+    setDonationModalOpen(false);
+  };
 
   const handleProgress = (secs) => {
     setSeconds(secs);
@@ -197,7 +205,7 @@ const Stage = () => {
 
   console.log(location.state.data.stageStreamKey);
 
-  const StrKey = 123;
+  const StrKey = location.state.data.stageId;
 
   const onChange = (e) => {
     setChat(e.target.value);
@@ -305,7 +313,8 @@ const Stage = () => {
             </div>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
-              {/* <img src="/images/artist.svg" /> */}
+              <DonatoonButton onClick={openDonationModal} />
+              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} />
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
@@ -323,6 +332,17 @@ const ChatButton = styled.button`
   padding: 0 21px;
   top: 1px;
   right: 12px;
+  border-radius: 12px;
+`;
+
+const DonatoonButton = styled.button`
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  background: url("/images/donation.svg") no-repeat 50%;
+  padding: 0 21px;
+  top: 1px;
+  right: 80px;
   border-radius: 12px;
 `;
 
