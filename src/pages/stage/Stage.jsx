@@ -344,7 +344,7 @@ position: relative;
    width : 100%;
   height : 200px !important;
   background: #1B1B24;
-  /* display: none; */
+  display: none;
   border-radius: 12px 12px 4px 4px;
   padding : 16px 23px 26px ;
 
