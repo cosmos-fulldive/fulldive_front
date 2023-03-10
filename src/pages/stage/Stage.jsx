@@ -144,6 +144,7 @@ const Stage = () => {
   const sendMessage = () => {
     let val = {
       type: 1,
+      nickname: user_data.userNickname,
       message: chat,
     };
 
@@ -281,7 +282,7 @@ const Stage = () => {
                     <img src="/images/artist.svg" />
                     <div>
                       <div className="user">
-                        {user_data.userNickname}
+                        {msg.nickname}
                         <span>{currentTime}</span>
                       </div>
                       <div>{msg.message}</div>
