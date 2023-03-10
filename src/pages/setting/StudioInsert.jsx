@@ -180,10 +180,11 @@ const StudioInsert = () => {
     };
 
     try {
+      console.log(insertData);
       const { data } = await axios.post(`http://118.63.182.3:8880/api/stage/stageInsert`, insertData);
       console.log(data.response);
       data.response === 200 && window.alert("공연 등록 성공");
-      navigate("/setting/studio");
+      // navigate("/setting/studio");
     } catch (e) {
       // 서버에서 받은 에러 메시지 출력
       console.log(e);

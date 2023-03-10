@@ -53,7 +53,7 @@ const donation_item = [
   },
   {
     id: 1,
-    imgUrl: "/images/stage/10.svg",
+    imgUrl: "/images/stage/100.svg",
     name: "10",
   },
   {
@@ -284,34 +284,36 @@ const Stage = () => {
                 ))}
             </div>
             <DonationImgContainer>
-              <DonationSelect>
-                <DonationTop>
-                  <DonationTextRight>
-                    <div>응원하기</div>
-                    <DonationCount >
-                      <img src="/images/stage/StageComet.svg" />
-                      <div>20</div>
-                    </DonationCount>
-                  </DonationTextRight>
 
-                  <DonationTextLeft>
-                    <CloseButton type="button" ></CloseButton>
-                  </DonationTextLeft>
+              <DonationTop>
+                <DonationTextRight>
+                  <div>응원하기</div>
+                  <DonationCount >
+                    <img src="/images/stage/StageComet.svg" />
+                    <div>20</div>
+                  </DonationCount>
+                </DonationTextRight>
 
-                </DonationTop>
-                <DonationBottom>
-                  <DonationImg>
-                    {donation_item.map((data, id) => (
+                <DonationTextLeft>
+                  <CloseButton type="button" ></CloseButton>
+                </DonationTextLeft>
+
+              </DonationTop>
+              <DonationBottom>
+                <DonationImg>
+                  {donation_item.map((data, id) => (
+                    <DonationBox>
                       <div key={id}>
                         <img src={data.imgUrl} />
                         <div>
                           <p className="name">{data.name}</p>
                         </div>
                       </div>
-                    ))}
-                  </DonationImg>
-                </DonationBottom>
-              </DonationSelect>
+                    </DonationBox>
+                  ))}
+                </DonationImg>
+              </DonationBottom>
+
             </DonationImgContainer>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
@@ -344,12 +346,10 @@ position: relative;
   background: #1B1B24;
   /* display: none; */
   border-radius: 12px 12px 4px 4px;
+  padding : 16px 23px 26px ;
+
 `;
 
-const DonationSelect = styled.div`
-/* height: 100%; */
- padding : 16px 23px 26px ;
-`;
 
 const DonationTop = styled.div`
  
@@ -359,13 +359,32 @@ const DonationTop = styled.div`
 `;
 
 const DonationBottom = styled.div`
-  margin-top: 20px
-    
+  margin-top: 20px;
+    -webkit-box-pack: center;
+    justify-content: center;
 `;
 
 const DonationImg = styled.div`
   display: flex;
-    
+    -webkit-box-pack: start;
+    -webkit-box-align: center;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const DonationBox = styled.div`
+  display: flex;
+  /* width: 80px; */
+  /* background: #273DFF; */
+  >div {
+    > img {
+    /* width: 70px;
+    height: 70px; */
+  } 
+  }
+  
+  
 `;
 
 const DonationTextRight = styled.div`
