@@ -25,6 +25,7 @@ import ExitStage from "./pages/stage/ExitStage.jsx";
 import Artist from "./pages/artist/Artist.jsx";
 import StudioInsert from "./pages/setting/StudioInsert.jsx";
 import Studio from "./pages/setting/Studio.jsx";
+import Admin from "./pages/setting/Admin.jsx";
 
 const persistor = persistStore(store);
 
@@ -57,6 +58,7 @@ function App() {
                   <Route path="/signup/type/artistComplete" element={<ArtistComplete />} />
                   <Route path="/setting/studio" element={<Studio />} />
                   <Route path="/setting/studio/studioInsert" element={<StudioInsert />} />
+                  <Route path="/setting/admin" element={<Admin />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Wrap>

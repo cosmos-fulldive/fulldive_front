@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const MainTop = () => {
   const token = useSelector((state) => state.Auth.token);
+  const location = useLocation();
 
   const onClickLogout = () => {
     window.localStorage.clear();
     window.location.replace("/");
   };
+
+  console.log(location.pathname);
 
   return (
     <>
@@ -28,10 +31,8 @@ const MainTop = () => {
                 {/* <img src="/images/notification.svg" />
                 <img src="/images/ranking.svg" /> */}
               </div>
-              <LogoutButton  onClick={onClickLogout}>
-              
-                    <img src="/images/artist.png" />
-                  
+              <LogoutButton onClick={onClickLogout}>
+                <img src="/images/artist.png" />
               </LogoutButton>
             </RightBar>
           </Search>
@@ -107,9 +108,7 @@ const RightBar = styled.div`
   > div {
     > img {
       margin-right: 20px;
-      
     }
-    
   }
 `;
 
@@ -123,8 +122,6 @@ const LoginButton = styled.button`
 `;
 
 const LogoutButton = styled.button`
- 
- 
   /* background: #273dff; */
   border-radius: 100px;
   /* font-size: 1rem; */
@@ -132,11 +129,9 @@ const LogoutButton = styled.button`
   /* padding: 10px; */
   > img {
     width: 3rem;
- height: 3rem;
- border-radius: 100px;
+    height: 3rem;
+    border-radius: 100px;
   }
 `;
-
-
 
 export default MainTop;

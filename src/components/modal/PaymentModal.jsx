@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import PaymentNext from "../PaymentNext";
 
-const PaymentModal = ({ children, visible, onClose }: any) => {
+const PaymentModal = ({ children, visible, onClose }) => {
   if (!visible) {
     return null;
   }
@@ -14,7 +14,7 @@ const PaymentModal = ({ children, visible, onClose }: any) => {
 
   const [payment, setPayment] = useState(false);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setSelected({
       ...selected, // 기존의 input 객체를 복사한 뒤
@@ -149,7 +149,7 @@ const CometDiv = styled.div`
   }
 `;
 
-const CometLabel = styled.label<{ ticket: string }>`
+const CometLabel = styled.label`
   background: url("/images/comet.svg") no-repeat 10px;
   background-size: 24px;
   padding-left: 40px;
@@ -167,7 +167,7 @@ const CometLabel = styled.label<{ ticket: string }>`
   }}
 `;
 
-const IndividualTicket = styled.div<{ ticket: string }>`
+const IndividualTicket = styled.div`
   text-align: right;
   font-size: 1rem;
   ${({ ticket }) => {
@@ -242,13 +242,13 @@ const Close = styled.div`
   padding: 0 16px;
 `;
 
-const modalSettings = (visible: boolean) => css`
+const modalSettings = (visible) => css`
   visibility: ${visible ? "visible" : "hidden"};
   animation: ${visible ? fadeIn : fadeOut} 0.15s ease-out;
   transition: visibility 0.15s ease-out;
 `;
 
-const ModalSection = styled.div<{ visible: boolean }>`
+const ModalSection = styled.div`
   width: 520px;
   height: fit-content;
   position: absolute;
@@ -268,7 +268,7 @@ const ModalSection = styled.div<{ visible: boolean }>`
   }
 `;
 
-const Background = styled.div<{ visible: boolean }>`
+const Background = styled.div`
   top: 0;
   right: 0;
   bottom: 0;
