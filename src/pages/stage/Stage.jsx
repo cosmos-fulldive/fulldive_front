@@ -8,6 +8,7 @@ import DeclarationModal from "../../components/modal/DeclarationModal";
 import ReactPlayer from "react-player";
 import { useLocation } from "react-router-dom";
 import { w3cwebsocket as WebSocket } from "websocket";
+import { useSelector } from "react-redux";
 
 // const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 // const FlvNextPlayer = dynamic(() => import("@ztxtxwd/react-ts-flv-player/dist/ReactFlvPlayer"), {
@@ -68,9 +69,9 @@ const donation_item = [
   },
 ];
 
-
 const Stage = () => {
   const location = useLocation();
+  const user_data = useSelector((state) => state.Auth.user);
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
@@ -91,7 +92,9 @@ const Stage = () => {
   const currentTime = ampm + " " + hours + ":" + minutes;
 
   useEffect(() => {
-    const newClient = new WebSocket(`ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=test5`);
+    const newClient = new WebSocket(
+      `ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=${user_data.userId}`
+    );
     newClient.onopen = () => {
       console.log("WebSocket connected");
     };
@@ -141,6 +144,7 @@ const Stage = () => {
   const sendMessage = () => {
     let val = {
       type: 1,
+      nickname: user_data.userNickname,
       message: chat,
     };
 
@@ -189,6 +193,8 @@ const Stage = () => {
       setChat("");
     }
   };
+
+  console.log(user_data);
 
   return (
     <Fragment>
@@ -276,7 +282,8 @@ const Stage = () => {
                     <img src="/images/artist.svg" />
                     <div>
                       <div className="user">
-                        sangyeon Kim<span>{currentTime}</span>
+                        {msg.nickname}
+                        <span>{currentTime}</span>
                       </div>
                       <div>{msg.message}</div>
                     </div>
@@ -284,20 +291,18 @@ const Stage = () => {
                 ))}
             </div>
             <DonationImgContainer>
-
               <DonationTop>
                 <DonationTextRight>
                   <div>응원하기</div>
-                  <DonationCount >
+                  <DonationCount>
                     <img src="/images/stage/StageComet.svg" />
                     <div>20</div>
                   </DonationCount>
                 </DonationTextRight>
 
                 <DonationTextLeft>
-                  <CloseButton type="button" ></CloseButton>
+                  <CloseButton type="button"></CloseButton>
                 </DonationTextLeft>
-
               </DonationTop>
               <DonationBottom>
                 <DonationImg>
@@ -313,7 +318,6 @@ const Stage = () => {
                   ))}
                 </DonationImg>
               </DonationBottom>
-
             </DonationImgContainer>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
@@ -340,82 +344,77 @@ const ChatButton = styled.button`
 `;
 
 const DonationImgContainer = styled.div`
+
 position: relative;
    width : 100%;
   height : 200px !important;
   background: #1B1B24;
   display: none;
-  border-radius: 12px 12px 4px 4px;
-  padding : 16px 23px 26px ;
 
+  border-radius: 12px 12px 4px 4px;
+  padding: 16px 23px 26px;
 `;
 
-
 const DonationTop = styled.div`
- 
-    position: relative;
-    height: 35px;
-    display: flex;
+  position: relative;
+  height: 35px;
+  display: flex;
 `;
 
 const DonationBottom = styled.div`
   margin-top: 20px;
-    -webkit-box-pack: center;
-    justify-content: center;
+  -webkit-box-pack: center;
+  justify-content: center;
 `;
 
 const DonationImg = styled.div`
   display: flex;
-    -webkit-box-pack: start;
-    -webkit-box-align: center;
-    text-align: center;
-    justify-content: space-between;
-    align-items: center;
+  -webkit-box-pack: start;
+  -webkit-box-align: center;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const DonationBox = styled.div`
   display: flex;
   /* width: 80px; */
   /* background: #273DFF; */
-  >div {
+  > div {
     > img {
-    /* width: 70px;
+      /* width: 70px;
     height: 70px; */
-  } 
+    }
   }
-  
-  
 `;
 
 const DonationTextRight = styled.div`
   display: flex;
   > div {
-    display: flex ;
-    align-items : center ;
+    display: flex;
+    align-items: center;
   }
-  
 `;
 
 const DonationCount = styled.div`
   width: 70px;
-  background: #273DFF;
-border-radius: 100px;
-display: flex;
-align-items: center;
-justify-content: center;
-  >img {
+  background: #273dff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  > img {
     width: 24px;
     height: 24px;
-    margin-right: 6px
+    margin-right: 6px;
   }
-  
-  margin-left: 12px
-  
+
+  margin-left: 12px;
 `;
 
 const DonationTextLeft = styled.div`
-position: absolute;
-    right: 0;
+  position: absolute;
+  right: 0;
 `;
 const CloseButton = styled.button`
   background: url("/images/stage/close.svg") no-repeat 50%;

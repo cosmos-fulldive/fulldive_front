@@ -1,23 +1,32 @@
 import styled from "styled-components";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const MainTop = () => {
   const token = useSelector((state) => state.Auth.token);
   const user_data = useSelector((state) => state.Auth.user);
-  // const location = useLocation();
+  const location = useLocation();
 
   const onClickLogout = () => {
     window.localStorage.clear();
     window.location.replace("/");
   };
 
-  console.log(user_data);
+  console.log(location);
 
   return (
     <>
-      {token === "Test" ? (
+      {location.pathname === "/setting/admin" ? (
+        <Header>
+          <Logo>
+            <Link to="/">FullDive</Link>
+            <span>Live</span>
+            <span>연결됨</span>
+          </Logo>
+          <div></div>
+        </Header>
+      ) : token === "Test" ? (
         <Header>
           <Logo>
             <Link to="/">FullDive</Link>
