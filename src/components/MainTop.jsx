@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const MainTop = () => {
   const token = useSelector((state) => state.Auth.token);
-  const location = useLocation();
+  const user_data = useSelector((state) => state.Auth.user);
+  // const location = useLocation();
 
   const onClickLogout = () => {
     window.localStorage.clear();
     window.location.replace("/");
   };
 
-  console.log(location.pathname);
+  console.log(user_data);
 
   return (
     <>

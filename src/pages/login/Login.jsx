@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import axios from "axios";
 import SHA256 from "../../sha256";
 import { useDispatch } from "react-redux";
-import { setToken, setAdmin } from "../../store/_redcuers/authReducer";
+import { setToken, setAdmin, setUserData } from "../../store/_redcuers/authReducer";
 import { useNavigate, Link } from "react-router-dom";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
@@ -181,8 +181,8 @@ const Login = () => {
                 const { data } = await axios.post(`http://118.63.182.3:8880/api/user/login`, userData);
                 data.responses === 200 && dispatch(setToken(data.jwt));
                 dispatch(setAdmin(data.admin));
-                console.log(data.responses);
-                // navigate("/");
+                dispatch(setUserData(data.userInfo[0]));
+                navigate("/");
               } catch (e) {
                 // 서버에서 받은 에러 메시지 출력
                 console.log(e);
