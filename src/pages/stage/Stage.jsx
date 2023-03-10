@@ -248,7 +248,7 @@ const Stage = () => {
             <div id="chatContainer">
               {messages &&
                 messages.map((msg, index) => (
-                  <ChatBox>
+                  <ChatBox key={index}>
                     <img src="/images/artist.svg" />
                     <div>
                       <div className="user">
