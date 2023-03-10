@@ -23,21 +23,19 @@ const images = [
 ];
 
 const Home = () => {
-  // const stageData = useRecoilValue(getMainStageData);
-  // const newData = useRecoilValue(getMainArtistData);
 
-  // console.log(stageData);
-  // console.log(newData);
 
   useEffect(() => {
     getStageData();
     getArtistData();
+
   }, []);
 
   const [StageData, setStageData] = useState(null);
   const [artistData, setArtistData] = useState(null);
   const [artistModalOpen, setArtistModalOpen] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState(null);
+  const [loginData, setloginData] = useState(null);
 
   const getStageData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/main/mainInfo`).then((res) => setStageData(res.data));
@@ -46,6 +44,13 @@ const Home = () => {
   const getArtistData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
+
+
+
+
+
+
+  console.log(StageData);
 
   const openArtistModal = (artist) => {
     setSelectedArtist(artist);

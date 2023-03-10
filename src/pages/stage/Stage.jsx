@@ -96,6 +96,30 @@ import { w3cwebsocket as WebSocket } from "websocket";
 //   },
 // ];
 
+const donation_item = [
+  {
+    id: 1,
+    imgUrl: "/images/stage/5.svg",
+    name: "5",
+  },
+  {
+    id: 1,
+    imgUrl: "/images/stage/10.svg",
+    name: "10",
+  },
+  {
+    id: 1,
+    imgUrl: "/images/stage/15.svg",
+    name: "15",
+  },
+  {
+    id: 1,
+    imgUrl: "/images/stage/20.svg",
+    name: "20",
+  },
+];
+
+
 const Stage = () => {
   const location = useLocation();
   const [shareModalOpen, setShareModalOpen] = useState(false);
@@ -311,6 +335,36 @@ const Stage = () => {
                   </ChatBox>
                 ))}
             </div>
+            <DonationImgContainer>
+              <DonationSelect>
+                <DonationTop>
+                  <DonationTextRight>
+                    <div>응원하기</div>
+                    <DonationCount >
+                      <img src="/images/stage/StageComet.svg" />
+                      <div>20</div>
+                    </DonationCount>
+                  </DonationTextRight>
+
+                  <DonationTextLeft>
+                    <CloseButton type="button" ></CloseButton>
+                  </DonationTextLeft>
+
+                </DonationTop>
+                <DonationBottom>
+                  <DonationImg>
+                    {donation_item.map((data, id) => (
+                      <div key={id}>
+                        <img src={data.imgUrl} />
+                        <div>
+                          <p className="name">{data.name}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </DonationImg>
+                </DonationBottom>
+              </DonationSelect>
+            </DonationImgContainer>
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
               <DonatoonButton onClick={openDonationModal} />
@@ -333,6 +387,73 @@ const ChatButton = styled.button`
   top: 1px;
   right: 12px;
   border-radius: 12px;
+`;
+
+const DonationImgContainer = styled.div`
+position: relative;
+   width : 100%;
+  height : 200px !important;
+  background: #1B1B24;
+  /* display: none; */
+  border-radius: 12px 12px 4px 4px;
+`;
+
+const DonationSelect = styled.div`
+/* height: 100%; */
+ padding : 16px 23px 26px ;
+`;
+
+const DonationTop = styled.div`
+ 
+    position: relative;
+    height: 35px;
+    display: flex;
+`;
+
+const DonationBottom = styled.div`
+  margin-top: 20px
+    
+`;
+
+const DonationImg = styled.div`
+  display: flex;
+    
+`;
+
+const DonationTextRight = styled.div`
+  display: flex;
+  > div {
+    display: flex ;
+    align-items : center ;
+  }
+  
+`;
+
+const DonationCount = styled.div`
+  width: 70px;
+  background: #273DFF;
+border-radius: 100px;
+display: flex;
+align-items: center;
+justify-content: center;
+  >img {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px
+  }
+  
+  margin-left: 12px
+  
+`;
+
+const DonationTextLeft = styled.div`
+position: absolute;
+    right: 0;
+`;
+const CloseButton = styled.button`
+  background: url("/images/stage/close.svg") no-repeat 50%;
+  width: 24px;
+  height: 24px;
 `;
 
 const DonatoonButton = styled.button`

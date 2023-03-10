@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 // const icons = [
 //   {
@@ -25,8 +26,8 @@ import styled, { keyframes, css } from "styled-components";
 // ];
 
 const DonationModal = ({ children, visible, onClose }) => {
-
-  const [artistSelected, setartistSelected] = useState("A아티스트");
+  const location = useLocation();
+  const [artistSelected, setartistSelected] = useState(location.state.data.stageArtistId[0]);
 
   const handleChange = (e) => {
     setartistSelected(e.target.value);
@@ -35,6 +36,9 @@ const DonationModal = ({ children, visible, onClose }) => {
   if (!visible) {
     return null;
   }
+
+  console.log(location.state.data);
+  console.log(location.state.data.stageArtistId[0]);
 
   const text = window.location.href;
 
@@ -58,10 +62,9 @@ const DonationModal = ({ children, visible, onClose }) => {
           <p>응원 할 아티스트를 선택해주세요!</p>
           <ArtistDonationBox>
             <ArtistDonation>
-              <input type="radio" name="A아티스트" value="A아티스트" checked={artistSelected === "A아티스트"} onChange={handleChange} />
-              <label>A아티스트</label>
-              <input type="radio" name="B아티스트" value="B아티스트" checked={artistSelected === "B아티스트"} onChange={handleChange} />
-              <label>B아티스트</label>
+              <input type="radio" name="A아티스트" value={location.state.data.stageArtistId} checked={artistSelected === location.state.data.stageArtistId[0]} onChange={handleChange} />
+              <label>{location.state.data.stageArtistId}</label>
+
             </ArtistDonation>
           </ArtistDonationBox>
           <ButtonBox>
