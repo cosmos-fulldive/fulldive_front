@@ -320,7 +320,7 @@ const Stage = () => {
               </DonationBottom>
             </DonationImgContainer>
             <label>
-              <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} />
+              <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} maxLength="50" />
               <DonatoonButton onClick={openDonationModal} />
               <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} />
               <ChatButton onClick={sendMessage}></ChatButton>
