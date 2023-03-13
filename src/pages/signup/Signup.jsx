@@ -65,7 +65,7 @@ const Signup = () => {
               </div>
             </SocialLogin>
           </Top> */}
-          <Or>또는</Or>
+          {/* <Or>또는</Or> */}
           <Formik
             initialValues={{ email: "", password: "", emailSite: "", confirm_password: "" }}
             onSubmit={async (values) => {

@@ -1,12 +1,17 @@
-import WithdrawArtistModal from "components/modal/WithdrawArtistModal";
+import WithdrawArtistModal from "../../components/modal/WithdrawArtistModal";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const index = () => {
+const UserProfile = () => {
   const navigate = useNavigate();
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
+  const token = useSelector((state) => state.Auth.token);
+
+  useEffect(() => {
+    !token && navigate("/login");
+  }, [token]);
 
   const openWithdrawModal = () => {
     setWithdrawModalOpen(true);
@@ -14,12 +19,6 @@ const index = () => {
   const closeWithdrawModal = () => {
     setWithdrawModalOpen(false);
   };
-
-  const token = useSelector((state) => state.Auth.token);
-
-  useEffect(() => {
-    !token && navigate("/login");
-  }, [token]);
 
   return (
     <Container>
@@ -201,4 +200,4 @@ const Container = styled.main`
   padding-top: 30px;
 `;
 
-export default index;
+export default UserProfile;

@@ -26,6 +26,8 @@ import Artist from "./pages/artist/Artist.jsx";
 import StudioInsert from "./pages/setting/StudioInsert.jsx";
 import Studio from "./pages/setting/Studio.jsx";
 import Admin from "./pages/setting/Admin.jsx";
+import Profile from "./pages/setting/Profile.jsx";
+import UserProfile from "./pages/setting/UserProfile";
 
 const persistor = persistStore(store);
 
@@ -59,6 +61,9 @@ function App() {
                   <Route path="/setting/studio" element={<Studio />} />
                   <Route path="/setting/studio/studioInsert" element={<StudioInsert />} />
                   <Route path="/setting/admin" element={<Admin />} />
+                  <Route path="/setting/userProfile" element={<UserProfile />} />
+                  <Route path="/setting/companyProfile" element={<Profile />} />
+
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Wrap>

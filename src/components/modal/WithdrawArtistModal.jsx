@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 
 const WithdrawArtistModal = ({ visible, onClose }) => {
+  const [confirm, setConfirm] = useState(false);
+
   if (!visible) {
     return null;
   }
-
-  const [confirm, setConfirm] = useState(false);
 
   const sendConfirm = () => {
     setConfirm(true);
