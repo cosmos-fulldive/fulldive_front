@@ -109,6 +109,8 @@ const Stage = () => {
     };
     setClient(newClient);
 
+    console.log("22222");
+
     // 새로운 ChatBox 요소를 추가하는 함수
     function addChatBox(obj) {
       const container = document.querySelector("#chatContainer");
@@ -143,7 +145,7 @@ const Stage = () => {
       const obj = messages[messages.length - 1];
       addChatBox(obj);
     }
-  }, [messages]);
+  }, []);
 
   const sendMessage = () => {
     let val = {
@@ -155,6 +157,8 @@ const Stage = () => {
     if (client.readyState === client.OPEN) {
       client.send(JSON.stringify(val));
     }
+
+    console.log("1111");
   };
 
   const openShareModal = () => {
@@ -186,9 +190,6 @@ const Stage = () => {
   };
 
   // const StrKey = 123;
-  console.log(location.state.data);
-
-  console.log(location.state.data.stageStreamKey);
 
   const StrKey = location.state.data.stageStreamKey;
 
@@ -202,8 +203,6 @@ const Stage = () => {
       setChat("");
     }
   };
-
-  console.log(user_data);
 
   return (
     <Fragment>
