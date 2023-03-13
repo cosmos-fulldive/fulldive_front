@@ -4,7 +4,7 @@ import ShareModal from "../../components/modal/ShareModal";
 import DonationModal from "../../components/modal/DonationModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
 import ReactPlayer from "react-player";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { w3cwebsocket as WebSocket } from "websocket";
 import { useSelector } from "react-redux";
 
@@ -69,6 +69,7 @@ const donation_item = [
 
 const Stage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const user_data = useSelector((state) => state.Auth.user);
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
@@ -95,6 +96,12 @@ const Stage = () => {
 
   // [] 안에 함부로 뭐 넣지 말것 안그러면 웹소켓 중복 유저 체크당함
   useEffect(() => {
+    if (user_data === undefined) {
+      window.alert("로그인 후 입장 부탁드립니다");
+      navigate("/login");
+      return;
+    }
+
     const newClient = new WebSocket(
       `ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=${user_data.userId}`
     );
@@ -114,7 +121,7 @@ const Stage = () => {
     };
     setClient(newClient);
     //새로운 ChatBox 요소를 추가하는 함수
-  }, []);
+  }, [user_data]);
 
   useEffect(() => {
     function addChatBox(obj) {

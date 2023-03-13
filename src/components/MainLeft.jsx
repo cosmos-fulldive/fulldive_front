@@ -39,7 +39,7 @@ const menus = [
     name: "설정",
     imgUrl: "/images/setting.svg",
     nowImgUrl: "/images/setting_white.svg",
-    pathname: "/setting/profile",
+    pathname: "/setting/userProfile",
   },
   // {
   //   id: 6,
@@ -56,7 +56,7 @@ const company_setting_menus = [
     name: "프로필",
     imgUrl: "/images/setting/user.svg",
     nowImgUrl: "/images/setting/user_white.svg",
-    pathname: "/setting/profile",
+    pathname: "/setting/companyProfile",
   },
   // {
   //   id: 2,

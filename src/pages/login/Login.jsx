@@ -164,7 +164,7 @@ const Login = () => {
             </SocialLogin>
           </Top> */}
 
-          <Or>또는</Or>
+          {/* <Or>또는</Or> */}
 
           <Formik
             initialValues={{ email: "", password: "", emailSite: "" }}
@@ -458,7 +458,7 @@ const Wrap = styled.div`
 const Container = styled.main`
   width: calc(100vw - 250px);
   margin-left: 250px;
-  height: 100%;
+  height: 100vh;
   background: #14141c;
   color: #ffffff;
   display: flex;
