@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-// import queryString from "query-string";
 import ShareModal from "../../components/modal/ShareModal";
 import DonationModal from "../../components/modal/DonationModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
@@ -53,17 +51,17 @@ const donation_item = [
     name: "5",
   },
   {
-    id: 1,
+    id: 2,
     imgUrl: "/images/stage/100.svg",
     name: "10",
   },
   {
-    id: 1,
+    id: 3,
     imgUrl: "/images/stage/15.svg",
     name: "15",
   },
   {
-    id: 1,
+    id: 4,
     imgUrl: "/images/stage/20.svg",
     name: "20",
   },
@@ -74,19 +72,18 @@ const Stage = () => {
   const user_data = useSelector((state) => state.Auth.user);
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
+  const [DonationImgOpen, setDonationImglOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [userCount, setUserCount] = useState(0);
-
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
+
   const now = new Date();
   let hours = now.getHours();
   let minutes = now.getMinutes();
   let ampm = hours >= 12 ? "PM" : "AM";
-
-  console.log(messages);
 
   hours = hours % 12;
   hours = hours ? hours : 12;
@@ -141,6 +138,21 @@ const Stage = () => {
     }
   };
 
+  // 도네이션
+  // const sendDanation = () => {
+  //   let val = {
+  //     type: 1,
+  //     nickname: user_data.userNickname,
+  //     message: chat,
+  //   };
+
+  //   if (client.readyState === client.OPEN) {
+  //     client.send(JSON.stringify(val));
+  //   }
+
+  //   console.log("1111");
+  // };
+
   const openShareModal = () => {
     setShareModalOpen(true);
   };
@@ -158,6 +170,15 @@ const Stage = () => {
   };
   const closeDonationModal = () => {
     setDonationModalOpen(false);
+  };
+
+  const openDonationImg = () => {
+    setDonationModalOpen(false);
+    setDonationImglOpen(true);
+  };
+
+  const closeDonationImg = () => {
+    setDonationImglOpen(false);
   };
 
   const handleProgress = (secs) => {
@@ -178,6 +199,16 @@ const Stage = () => {
       setChat("");
     }
   };
+
+  const [focusedButton, setFocusedButton] = useState(null);
+
+  function handleFocus(label) {
+    setFocusedButton(label);
+  }
+
+  function handleBlur() {
+    setFocusedButton(null);
+  }
 
   return (
     <Fragment>
@@ -273,7 +304,10 @@ const Stage = () => {
                   </ChatBox>
                 ))}
             </div>
-            <DonationImgContainer>
+
+            {/* 도네이션 이미지 div */}
+
+            <DonationImgContainer style={{ display: DonationImgOpen ? "" : "none" }}>
               <DonationTop>
                 <DonationTextRight>
                   <div>응원하기</div>
@@ -284,28 +318,37 @@ const Stage = () => {
                 </DonationTextRight>
 
                 <DonationTextLeft>
-                  <CloseButton type="button"></CloseButton>
+                  <CloseButton type="button" onClick={closeDonationImg}></CloseButton>
                 </DonationTextLeft>
               </DonationTop>
               <DonationBottom>
                 <DonationImg>
                   {donation_item.map((data, id) => (
                     <DonationBox>
-                      <div key={id}>
-                        <img src={data.imgUrl} />
-                        <div>
-                          <p className="name">{data.name}</p>
+                      <DonationImgBox
+                        key={id}
+                        checked={focusedButton === id ? "focused" : ""}
+                        onFocus={() => handleFocus(id)}
+                        // onFocus={handleFocus}
+                        onBlur={handleBlur}
+                      >
+                        <div key={id}>
+                          <img src={data.imgUrl} />
+                          <div>
+                            <p className="name">{data.name}</p>
+                          </div>
                         </div>
-                      </div>
+                      </DonationImgBox>
                     </DonationBox>
                   ))}
                 </DonationImg>
               </DonationBottom>
             </DonationImgContainer>
+
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} maxLength="50" />
               <DonatoonButton onClick={openDonationModal} />
-              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} />
+              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} onChange={openDonationImg} />
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
@@ -332,6 +375,7 @@ const DonationImgContainer = styled.div`
   height: 200px !important;
   background: #1b1b24;
   /* display: none; */
+
   border-radius: 12px 12px 4px 4px;
   padding: 16px 23px 26px;
 `;
@@ -350,10 +394,10 @@ const DonationBottom = styled.div`
 
 const DonationImg = styled.div`
   display: flex;
-  -webkit-box-pack: start;
-  -webkit-box-align: center;
   text-align: center;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+  justify-content: space-around;
+  -webkit-box-align: center;
   align-items: center;
 `;
 
@@ -367,6 +411,19 @@ const DonationBox = styled.div`
     height: 70px; */
     }
   }
+`;
+
+const DonationImgBox = styled.button`
+  width: 80px;
+  height: 120px;
+
+  ${({ checked }) =>
+    !checked
+      ? ``
+      : `border: 2px solid #273DFF;
+    `}
+
+  border-radius: 8px;
 `;
 
 const DonationTextRight = styled.div`
