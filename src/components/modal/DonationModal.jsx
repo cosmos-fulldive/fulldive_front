@@ -4,9 +4,14 @@ import { useLocation } from "react-router-dom";
 
 
 
-const DonationModal = ({ children, visible, onClose, onChange, }) => {
+const DonationModal = ({ children, visible, onClose, onChange, setselectArtist }) => {
   const location = useLocation();
   const [artistSelected, setartistSelected] = useState(location.state.data.stageArtistId[0]);
+
+  const sendData = () => {
+    setselectArtist(artistSelected);
+    onChange()
+  }
 
   const handleChange = (e) => {
     setartistSelected(e.target.value);
@@ -16,8 +21,7 @@ const DonationModal = ({ children, visible, onClose, onChange, }) => {
     return null;
   }
 
-  console.log(location.state.data);
-  console.log(location.state.data.stageArtistId[0]);
+  console.log(artistSelected);
 
   const text = window.location.href;
 
@@ -47,7 +51,7 @@ const DonationModal = ({ children, visible, onClose, onChange, }) => {
             </ArtistDonation>
           </ArtistDonationBox>
           <ButtonBox>
-            <FightButton onClick={onChange}>응원하기</FightButton>
+            <FightButton onClick={sendData} >응원하기</FightButton>
           </ButtonBox>
           {/* <Icons>
             {icons.map((icon, id) => (

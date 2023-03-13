@@ -67,7 +67,7 @@ const donation_item = [
   },
 ];
 
-const Stage = () => {
+const Stage = (props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const user_data = useSelector((state) => state.Auth.user);
@@ -81,6 +81,11 @@ const Stage = () => {
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
 
+  const [selectArtist, setselectArtist] = useState("");
+  const [selectDonation, setselectDonation] = useState("")
+
+  console.log('selectArtist', selectArtist)
+
   const now = new Date();
   let hours = now.getHours();
   let minutes = now.getMinutes();
@@ -91,8 +96,6 @@ const Stage = () => {
   minutes = minutes < 10 ? "0" + minutes : minutes;
 
   const currentTime = ampm + " " + hours + ":" + minutes;
-
-  console.log(userCount);
 
   // [] 안에 함부로 뭐 넣지 말것 안그러면 웹소켓 중복 유저 체크당함
   useEffect(() => {
@@ -224,7 +227,12 @@ const Stage = () => {
 
   console.log(user_data);
 
-  console.log(location.artistSelected);
+  console.log(selectArtist);
+  console.log(selectDonation);
+
+  const donationHandle = (e) => {
+    setselectDonation(e.target.value);
+  };
 
   return (
     <Fragment>
@@ -347,6 +355,8 @@ const Stage = () => {
                         onFocus={() => handleFocus(id)}
                         // onFocus={handleFocus}
                         onBlur={handleBlur}
+                        value={selectDonation}
+                        onChange={donationHandle}
                       >
                         <div key={id}>
                           <img src={data.imgUrl} />
@@ -364,7 +374,7 @@ const Stage = () => {
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} maxLength="50" />
               <DonatoonButton onClick={openDonationModal} />
-              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} onChange={openDonationImg} />
+              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} onChange={openDonationImg} setselectArtist={setselectArtist} />
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
