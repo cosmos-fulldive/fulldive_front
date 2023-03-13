@@ -75,9 +75,7 @@ const Stage = () => {
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
   const [DonationImgOpen, setDonationImglOpen] = useState(false);
 
-  const [isFocused, setIsFocused] = useState(false);
-
-
+  const [numClients, setNumClients] = useState(0);
 
 
 
@@ -87,6 +85,7 @@ const Stage = () => {
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
+
   const now = new Date();
   let hours = now.getHours();
   let minutes = now.getMinutes();
@@ -111,9 +110,18 @@ const Stage = () => {
         // console.log("WebSocket message received:", obj);
         setMessages((prevMessages) => [...prevMessages, obj]);
       };
+
+      newClient.on('num clients', (num) => {
+        console.log('Number of clients: ' + num);
+        setNumClients(num);
+      });
       setClient(newClient);
 
       console.log("22222");
+
+
+
+
     } catch (error) {
       console.log(error);
     }
@@ -217,13 +225,7 @@ const Stage = () => {
     setSeconds(secs);
   };
 
-  function handleFocus() {
-    setIsFocused(true);
-  }
 
-  function handleBlur() {
-    setIsFocused(false);
-  }
   // const StrKey = 123;
 
   const StrKey = location.state.data.stageStreamKey;
@@ -238,6 +240,16 @@ const Stage = () => {
       setChat("");
     }
   };
+
+  const [focusedButton, setFocusedButton] = useState(null);
+
+  function handleFocus(label) {
+    setFocusedButton(label);
+  }
+
+  function handleBlur() {
+    setFocusedButton(null);
+  }
 
   return (
     <Fragment>
@@ -268,7 +280,9 @@ const Stage = () => {
             </TitleText>
             <ButtonWrap>
               <span>
-                시청자 수 <span>00명</span>
+                시청자 수
+                <span>{numClients}</span>
+
               </span>
               <button onClick={openShareModal}>공유</button>
               <ShareModal visible={shareModalOpen} onClose={closeShareModal} />
@@ -336,7 +350,7 @@ const Stage = () => {
 
             {/* 도네이션 이미지 div */}
 
-            <DonationImgContainer style={{ display: DonationImgOpen ? "block" : "none" }}>
+            <DonationImgContainer style={{ display: DonationImgOpen ? "" : "none" }}>
               <DonationTop>
                 <DonationTextRight>
                   <div>응원하기</div>
@@ -353,10 +367,13 @@ const Stage = () => {
               <DonationBottom>
                 <DonationImg>
                   {donation_item.map((data, id) => (
-                    <DonationBox>
+                    <DonationBox
+                    >
                       <DonationImgBox
-                        checked={isFocused ? "focused" : ""}
-                        onFocus={handleFocus}
+                        key={id}
+                        checked={focusedButton === id ? "focused" : ""}
+                        onFocus={() => handleFocus(id)}
+                        // onFocus={handleFocus}
                         onBlur={handleBlur}
                       >
                         <div
@@ -427,11 +444,12 @@ const DonationBottom = styled.div`
 
 const DonationImg = styled.div`
   display: flex;
-  -webkit-box-pack: start;
-  -webkit-box-align: center;
-  text-align: center;
-  justify-content: space-between;
-  align-items: center;
+    text-align: center;
+    -webkit-box-pack: justify;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    align-items: center;
+
 `;
 
 const DonationBox = styled.div`
@@ -444,19 +462,21 @@ const DonationBox = styled.div`
     height: 70px; */
     }
   }
+
+  
 `;
 
 const DonationImgBox = styled.button`
 width: 80px;
 height: 120px;
 
+
+
 ${({ checked }) =>
     !checked
       ? ``
       : `border: 2px solid #273DFF;
     `}
-
-
 
 border-radius: 8px;
 
