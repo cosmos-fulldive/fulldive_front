@@ -76,6 +76,7 @@ const Stage = () => {
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [userCount, setUserCount] = useState(0);
 
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -85,63 +86,48 @@ const Stage = () => {
   let minutes = now.getMinutes();
   let ampm = hours >= 12 ? "PM" : "AM";
 
+  console.log(messages);
+
   hours = hours % 12;
   hours = hours ? hours : 12;
   minutes = minutes < 10 ? "0" + minutes : minutes;
 
   const currentTime = ampm + " " + hours + ":" + minutes;
 
+  // [] 안에 함부로 뭐 넣지 말것 안그러면 웹소켓 중복 유저 체크당함
   useEffect(() => {
     const newClient = new WebSocket(
       `ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=${user_data.userId}`
     );
+
     newClient.onopen = () => {
       console.log("WebSocket connected");
     };
+
     newClient.onmessage = (message) => {
       const obj = JSON.parse(message.data);
-      // console.log("WebSocket message received:", obj);
-      setMessages((prevMessages) => [...prevMessages, obj]);
+      setUserCount(obj.userCount);
+      if (obj.type === 1 || obj.type === 2) {
+        setMessages((prevMessages) => [...prevMessages, obj]);
+      }
     };
     setClient(newClient);
+    //새로운 ChatBox 요소를 추가하는 함수
+  }, []);
 
-    console.log("22222");
-
-    // 새로운 ChatBox 요소를 추가하는 함수
+  useEffect(() => {
     function addChatBox(obj) {
       const container = document.querySelector("#chatContainer");
-
-      // const chatBox = document.createElement("div");
-      // chatBox.className = "ChatBox";
-      // // chatBox.className = "ChatBox";
-
-      // const img = document.createElement("img");
-      // img.src = "/images/artist.svg";
-      // chatBox.appendChild(img);
-
-      // const innerDiv = document.createElement("div");
-      // chatBox.appendChild(innerDiv);
-
-      // const userDiv = document.createElement("div");
-      // userDiv.className = "user";
-      // userDiv.innerText = `${obj.type} ${obj.message}`;
-      // innerDiv.appendChild(userDiv);
-
-      // const messageDiv = document.createElement("div");
-      // messageDiv.innerText = obj.message;
-      // innerDiv.appendChild(messageDiv);
-
-      // container.appendChild(chatBox);
-
       container.scrollTop = container.scrollHeight;
     }
 
-    // 메시지를 받으면 ChatBox 추가 함수 호출
+    //메시지를 받으면 ChatBox 추가 함수 호출
     if (messages.length > 0) {
+      // setUserCount(obj.userCount);
       const obj = messages[messages.length - 1];
       addChatBox(obj);
     }
-  }, []);
+  }, [messages]);
 
   const sendMessage = () => {
     let val = {
@@ -153,8 +139,6 @@ const Stage = () => {
     if (client.readyState === client.OPEN) {
       client.send(JSON.stringify(val));
     }
-
-    console.log("1111");
   };
 
   const openShareModal = () => {
@@ -224,7 +208,7 @@ const Stage = () => {
             </TitleText>
             <ButtonWrap>
               <span>
-                시청자 수 <span>00명</span>
+                시청자 수 <span>{userCount}</span>
               </span>
               <button onClick={openShareModal}>공유</button>
               <ShareModal visible={shareModalOpen} onClose={closeShareModal} />
