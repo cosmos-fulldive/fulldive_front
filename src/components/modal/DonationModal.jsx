@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 
 
-const DonationModal = ({ children, visible, onClose }) => {
+const DonationModal = ({ children, visible, onClose, onChange }) => {
   const location = useLocation();
   const [artistSelected, setartistSelected] = useState(location.state.data.stageArtistId[0]);
 
@@ -47,7 +47,7 @@ const DonationModal = ({ children, visible, onClose }) => {
             </ArtistDonation>
           </ArtistDonationBox>
           <ButtonBox>
-            <FightButton>응원하기</FightButton>
+            <FightButton onClick={onChange}>응원하기</FightButton>
           </ButtonBox>
           {/* <Icons>
             {icons.map((icon, id) => (

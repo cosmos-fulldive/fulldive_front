@@ -77,6 +77,11 @@ const Stage = () => {
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
   const [DonationImgOpen, setDonationImglOpen] = useState(false);
 
+  const [isFocused, setIsFocused] = useState(false);
+
+
+
+
 
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
@@ -161,6 +166,21 @@ const Stage = () => {
     console.log("1111");
   };
 
+  // 도네이션 
+  // const sendDanation = () => {
+  //   let val = {
+  //     type: 1,
+  //     nickname: user_data.userNickname,
+  //     message: chat,
+  //   };
+
+  //   if (client.readyState === client.OPEN) {
+  //     client.send(JSON.stringify(val));
+  //   }
+
+  //   console.log("1111");
+  // };
+
   const openShareModal = () => {
     setShareModalOpen(true);
   };
@@ -181,13 +201,26 @@ const Stage = () => {
   };
 
   const openDonationImg = () => {
+    setDonationModalOpen(false);
     setDonationImglOpen(true);
+  };
+
+  const closeDonationImg = () => {
+    setDonationImglOpen(false);
   };
 
 
   const handleProgress = (secs) => {
     setSeconds(secs);
   };
+
+  function handleFocus() {
+    setIsFocused(true);
+  }
+
+  function handleBlur() {
+    setIsFocused(false);
+  }
 
   // const StrKey = 123;
 
@@ -300,36 +333,46 @@ const Stage = () => {
             </div>
 
             {/* 도네이션 이미지 div */}
-            {DonationImgOpen &&
-              <DonationImgContainer>
-                <DonationTop>
-                  <DonationTextRight>
-                    <div>응원하기</div>
-                    <DonationCount>
-                      <img src="/images/stage/StageComet.svg" />
-                      <div>20</div>
-                    </DonationCount>
-                  </DonationTextRight>
 
-                  <DonationTextLeft>
-                    <CloseButton type="button"></CloseButton>
-                  </DonationTextLeft>
-                </DonationTop>
-                <DonationBottom>
-                  <DonationImg>
-                    {donation_item.map((data, id) => (
-                      <DonationBox>
-                        <div key={id}>
+            <DonationImgContainer style={{ display: DonationImgOpen ? "block" : "none" }}>
+              <DonationTop>
+                <DonationTextRight>
+                  <div>응원하기</div>
+                  <DonationCount>
+                    <img src="/images/stage/StageComet.svg" />
+                    <div>20</div>
+                  </DonationCount>
+                </DonationTextRight>
+
+                <DonationTextLeft>
+                  <CloseButton type="button" onClick={closeDonationImg}></CloseButton>
+                </DonationTextLeft>
+              </DonationTop>
+              <DonationBottom>
+                <DonationImg>
+                  {donation_item.map((data, id) => (
+                    <DonationBox>
+                      <DonationImgBox
+                        checked={isFocused ? "focused" : ""}
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                      >
+                        <div
+                          key={id}
+
+                        >
                           <img src={data.imgUrl} />
                           <div>
                             <p className="name">{data.name}</p>
                           </div>
                         </div>
-                      </DonationBox>
-                    ))}
-                  </DonationImg>
-                </DonationBottom>
-              </DonationImgContainer>}
+                      </DonationImgBox>
+
+                    </DonationBox>
+                  ))}
+                </DonationImg>
+              </DonationBottom>
+            </DonationImgContainer>
 
 
             <label>
@@ -399,6 +442,22 @@ const DonationBox = styled.div`
     height: 70px; */
     }
   }
+`;
+
+const DonationImgBox = styled.button`
+width: 80px;
+height: 120px;
+
+${({ checked }) =>
+    !checked
+      ? ``
+      : `border: 2px solid #273DFF;
+    `}
+
+
+
+border-radius: 8px;
+
 `;
 
 const DonationTextRight = styled.div`
