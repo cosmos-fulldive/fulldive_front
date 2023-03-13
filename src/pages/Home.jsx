@@ -23,12 +23,9 @@ const images = [
 ];
 
 const Home = () => {
-
-
   useEffect(() => {
     getStageData();
     getArtistData();
-
   }, []);
 
   const [StageData, setStageData] = useState(null);
@@ -44,13 +41,6 @@ const Home = () => {
   const getArtistData = async () => {
     await axios.get(`http://118.63.182.3:8880/api/artist/findAllCreateArtistList`).then((res) => setArtistData(res.data));
   };
-
-
-
-
-
-
-  console.log(StageData);
 
   const openArtistModal = (artist) => {
     setSelectedArtist(artist);
@@ -108,7 +98,7 @@ const Home = () => {
             <ArtistModal visible={artistModalOpen} onClose={closeArtistModal} data={selectedArtist} />
           </SwiperLayout>
           <StageContainer>
-            <a href="/stage">
+            <a href="/stage/liveStage">
               <Title>라이브 스테이지</Title>
             </a>
             <SwiperLayout>
@@ -144,7 +134,7 @@ const Home = () => {
             </SwiperLayout>
           </StageContainer>
           <StageContainer>
-            <a href="/stage">
+            <a href="/stage/upcomingStage">
               <Title>다가오는 스테이지</Title>
             </a>
             <SwiperLayout>
@@ -176,7 +166,7 @@ const Home = () => {
             </SwiperLayout>
           </StageContainer>
           <StageContainer>
-            <a href="/stage">
+            <a href="/stage/exitStage">
               <Title>지난 스테이지</Title>
             </a>
             <SwiperLayout>
