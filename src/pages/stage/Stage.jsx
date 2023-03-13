@@ -75,7 +75,7 @@ const Stage = () => {
   const [DonationImgOpen, setDonationImglOpen] = useState(false);
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
-  const [userCount, setUserCount] = useState(0);
+  const [userCount, setUserCount] = useState(null);
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
@@ -91,6 +91,8 @@ const Stage = () => {
 
   const currentTime = ampm + " " + hours + ":" + minutes;
 
+  console.log(userCount);
+
   // [] 안에 함부로 뭐 넣지 말것 안그러면 웹소켓 중복 유저 체크당함
   useEffect(() => {
     const newClient = new WebSocket(
@@ -103,7 +105,9 @@ const Stage = () => {
 
     newClient.onmessage = (message) => {
       const obj = JSON.parse(message.data);
-      setUserCount(obj.userCount);
+      if (obj.type === 6) {
+        setUserCount(obj.userCount);
+      }
       if (obj.type === 1 || obj.type === 2) {
         setMessages((prevMessages) => [...prevMessages, obj]);
       }
@@ -122,6 +126,7 @@ const Stage = () => {
     if (messages.length > 0) {
       // setUserCount(obj.userCount);
       const obj = messages[messages.length - 1];
+      console.log("obj", obj);
       addChatBox(obj);
     }
   }, [messages]);
