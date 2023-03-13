@@ -215,6 +215,10 @@ const Stage = () => {
     setFocusedButton(null);
   }
 
+  console.log(user_data);
+
+  console.log(location.artistSelected);
+
   return (
     <Fragment>
       <Container>
@@ -318,7 +322,7 @@ const Stage = () => {
                   <div>응원하기</div>
                   <DonationCount>
                     <img src="/images/stage/StageComet.svg" />
-                    <div>20</div>
+                    <div>{user_data.userComet}</div>
                   </DonationCount>
                 </DonationTextRight>
 
@@ -440,7 +444,8 @@ const DonationTextRight = styled.div`
 `;
 
 const DonationCount = styled.div`
-  width: 70px;
+  /* width: 70px; */
+  padding: 0 10px;
   background: #273dff;
   border-radius: 100px;
   display: flex;

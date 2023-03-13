@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 
 
-const DonationModal = ({ children, visible, onClose, onChange }) => {
+const DonationModal = ({ children, visible, onClose, onChange, }) => {
   const location = useLocation();
   const [artistSelected, setartistSelected] = useState(location.state.data.stageArtistId[0]);
 

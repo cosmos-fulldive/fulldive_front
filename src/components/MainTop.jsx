@@ -15,6 +15,8 @@ const MainTop = () => {
 
   console.log(location);
 
+  console.log(user_data);
+
   return (
     <>
       {location.pathname === "/setting/admin" ? (
