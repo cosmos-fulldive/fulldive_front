@@ -81,8 +81,9 @@ const Stage = (props) => {
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
 
-  const [selectArtist, setselectArtist] = useState("");
   const [selectDonation, setselectDonation] = useState("")
+  const [selectArtist, setselectArtist] = useState("");
+
 
   console.log('selectArtist', selectArtist)
 
@@ -228,11 +229,15 @@ const Stage = (props) => {
   console.log(user_data);
 
   console.log(selectArtist);
-  console.log(selectDonation);
 
-  const donationHandle = (e) => {
+
+
+
+  const handleDonation = (e) => {
+    console.log(e.target.value);
     setselectDonation(e.target.value);
   };
+
 
   return (
     <Fragment>
@@ -355,8 +360,8 @@ const Stage = (props) => {
                         onFocus={() => handleFocus(id)}
                         // onFocus={handleFocus}
                         onBlur={handleBlur}
-                        value={selectDonation}
-                        onChange={donationHandle}
+                        value={data.name}
+                        onClick={handleDonation}
                       >
                         <div key={id}>
                           <img src={data.imgUrl} />
