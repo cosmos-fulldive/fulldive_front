@@ -1,7 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
-// import queryString from "query-string";
 import ShareModal from "../../components/modal/ShareModal";
 import DonationModal from "../../components/modal/DonationModal";
 import DeclarationModal from "../../components/modal/DeclarationModal";
@@ -53,17 +51,17 @@ const donation_item = [
     name: "5",
   },
   {
-    id: 1,
+    id: 2,
     imgUrl: "/images/stage/100.svg",
     name: "10",
   },
   {
-    id: 1,
+    id: 3,
     imgUrl: "/images/stage/15.svg",
     name: "15",
   },
   {
-    id: 1,
+    id: 4,
     imgUrl: "/images/stage/20.svg",
     name: "20",
   },
@@ -101,20 +99,25 @@ const Stage = () => {
   const currentTime = ampm + " " + hours + ":" + minutes;
 
   useEffect(() => {
-    const newClient = new WebSocket(
-      `ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=${user_data.userId}`
-    );
-    newClient.onopen = () => {
-      console.log("WebSocket connected");
-    };
-    newClient.onmessage = (message) => {
-      const obj = JSON.parse(message.data);
-      // console.log("WebSocket message received:", obj);
-      setMessages((prevMessages) => [...prevMessages, obj]);
-    };
-    setClient(newClient);
+    try {
+      const newClient = new WebSocket(
+        `ws://fulldive.live:8885/MilcomedaSocket?roomId=${location.state.data.stageId},userId=${user_data.userId}`
+      );
+      newClient.onopen = () => {
+        console.log("WebSocket connected");
+      };
+      newClient.onmessage = (message) => {
+        const obj = JSON.parse(message.data);
+        // console.log("WebSocket message received:", obj);
+        setMessages((prevMessages) => [...prevMessages, obj]);
+      };
+      setClient(newClient);
 
-    console.log("22222");
+      console.log("22222");
+    } catch (error) {
+      console.log(error);
+    }
+
 
     // 새로운 ChatBox 요소를 추가하는 함수
     function addChatBox(obj) {
@@ -221,7 +224,6 @@ const Stage = () => {
   function handleBlur() {
     setIsFocused(false);
   }
-
   // const StrKey = 123;
 
   const StrKey = location.state.data.stageStreamKey;
