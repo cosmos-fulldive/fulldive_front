@@ -2,28 +2,7 @@ import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { useLocation } from "react-router-dom";
 
-// const icons = [
-//   {
-//     id: 1,
-//     imgUrl: "/images/stage/instagram.svg",
-//   },
-//   {
-//     id: 2,
-//     imgUrl: "/images/stage/twitter.svg",
-//   },
-//   {
-//     id: 3,
-//     imgUrl: "/images/stage/facebook.svg",
-//   },
-//   {
-//     id: 4,
-//     imgUrl: "/images/stage/kakao.svg",
-//   },
-//   {
-//     id: 5,
-//     imgUrl: "/images/stage/line.svg",
-//   },
-// ];
+
 
 const DonationModal = ({ children, visible, onClose }) => {
   const location = useLocation();

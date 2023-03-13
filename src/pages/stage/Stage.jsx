@@ -73,7 +73,11 @@ const Stage = () => {
   const location = useLocation();
   const user_data = useSelector((state) => state.Auth.user);
   const [shareModalOpen, setShareModalOpen] = useState(false);
+
   const [DonationModalOpen, setDonationModalOpen] = useState(false);
+  const [DonationImgOpen, setDonationImglOpen] = useState(false);
+
+
   const [declarationModalOpen, setDeclareModalOpen] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
@@ -171,6 +175,11 @@ const Stage = () => {
   const closeDonationModal = () => {
     setDonationModalOpen(false);
   };
+
+  const openDonationImg = () => {
+    setDonationImglOpen(true);
+  };
+
 
   const handleProgress = (secs) => {
     setSeconds(secs);
@@ -290,39 +299,44 @@ const Stage = () => {
                   </ChatBox>
                 ))}
             </div>
-            <DonationImgContainer>
-              <DonationTop>
-                <DonationTextRight>
-                  <div>응원하기</div>
-                  <DonationCount>
-                    <img src="/images/stage/StageComet.svg" />
-                    <div>20</div>
-                  </DonationCount>
-                </DonationTextRight>
 
-                <DonationTextLeft>
-                  <CloseButton type="button"></CloseButton>
-                </DonationTextLeft>
-              </DonationTop>
-              <DonationBottom>
-                <DonationImg>
-                  {donation_item.map((data, id) => (
-                    <DonationBox>
-                      <div key={id}>
-                        <img src={data.imgUrl} />
-                        <div>
-                          <p className="name">{data.name}</p>
+            {/* 도네이션 이미지 div */}
+            {DonationImgOpen &&
+              <DonationImgContainer>
+                <DonationTop>
+                  <DonationTextRight>
+                    <div>응원하기</div>
+                    <DonationCount>
+                      <img src="/images/stage/StageComet.svg" />
+                      <div>20</div>
+                    </DonationCount>
+                  </DonationTextRight>
+
+                  <DonationTextLeft>
+                    <CloseButton type="button"></CloseButton>
+                  </DonationTextLeft>
+                </DonationTop>
+                <DonationBottom>
+                  <DonationImg>
+                    {donation_item.map((data, id) => (
+                      <DonationBox>
+                        <div key={id}>
+                          <img src={data.imgUrl} />
+                          <div>
+                            <p className="name">{data.name}</p>
+                          </div>
                         </div>
-                      </div>
-                    </DonationBox>
-                  ))}
-                </DonationImg>
-              </DonationBottom>
-            </DonationImgContainer>
+                      </DonationBox>
+                    ))}
+                  </DonationImg>
+                </DonationBottom>
+              </DonationImgContainer>}
+
+
             <label>
               <Chatting placeholder="메세지를 입력해주세요" onChange={onChange} value={chat} onKeyPress={onKeyPress} maxLength="50" />
               <DonatoonButton onClick={openDonationModal} />
-              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} />
+              <DonationModal visible={DonationModalOpen} onClose={closeDonationModal} onChange={openDonationImg} />
               <ChatButton onClick={sendMessage}></ChatButton>
             </label>
           </ChatBoxContainer>
@@ -349,7 +363,7 @@ position: relative;
    width : 100%;
   height : 200px !important;
   background: #1B1B24;
-  display: none;
+  /* display: none; */
 
   border-radius: 12px 12px 4px 4px;
   padding: 16px 23px 26px;
