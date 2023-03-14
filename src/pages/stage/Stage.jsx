@@ -52,7 +52,7 @@ const donation_item = [
   },
   {
     id: 2,
-    imgUrl: "/images/stage/100.svg",
+    imgUrl: "/images/stage/10.svg",
     name: "10",
   },
   {
@@ -81,7 +81,8 @@ const Stage = (props) => {
   const [messages, setMessages] = useState([]);
   const [chat, setChat] = useState("");
 
-  const [selectDonation, setselectDonation] = useState("")
+  const [donationSend, setDonationSend] = useState("");
+
   const [selectArtist, setselectArtist] = useState("");
 
 
@@ -142,32 +143,42 @@ const Stage = (props) => {
     }
   }, [messages]);
 
+  const ex = () => {
+    alert("실행되랏")
+  }
+
+
   const sendMessage = () => {
+
+
+
     let val = {
+
       type: 1,
       nickname: user_data.userNickname,
-      message: chat,
+      message: chat
     };
 
+
+
+
+
     if (client.readyState === client.OPEN) {
-      client.send(JSON.stringify(val));
+
+      // if (donationSend.donationImage === !null) {
+
+      //   client.send(JSON.stringify(donationSend));
+      // }
+
+
+      client.send(JSON.stringify(donationSend));
+      // client.send(JSON.stringify(val));
     }
+    // client.send(JSON.stringify(val));
   };
 
   // 도네이션
-  // const sendDanation = () => {
-  //   let val = {
-  //     type: 1,
-  //     nickname: user_data.userNickname,
-  //     message: chat,
-  //   };
 
-  //   if (client.readyState === client.OPEN) {
-  //     client.send(JSON.stringify(val));
-  //   }
-
-  //   console.log("1111");
-  // };
 
   const openShareModal = () => {
     setShareModalOpen(true);
@@ -207,11 +218,13 @@ const Stage = (props) => {
 
   const onChange = (e) => {
     setChat(e.target.value);
+
   };
 
   const onKeyPress = (e) => {
     if (e.key == "Enter") {
       sendMessage();
+      handleDonation();
       setChat("");
     }
   };
@@ -233,9 +246,54 @@ const Stage = (props) => {
 
 
 
+
+
   const handleDonation = (e) => {
-    console.log(e.target.value);
-    setselectDonation(e.target.value);
+
+    console.log(e);
+    console.log("================================");
+    const imgSrc = e.target.src;
+    var jbSplit = imgSrc.split('/', 7);
+    var imgName = jbSplit[5].split('.', 2);
+
+    console.log(imgName[0])
+
+
+    let img = {
+      // type: 2,
+      // nickName: user_data.userNickname,
+      // cometCurrentStreamKey: StrKey,
+      // message: "test",
+      // cometPurchaseUserId: user_data.userId,
+      // cometSalesStageId: location.state.data.stageId,
+      // cometCount: user_data.userComet,
+      // donationImage: donationCount
+
+      type: 2,
+      message: chat,
+      cometCurrentStreamKey: StrKey,
+      cometPurchaseUserId: user_data.userId,
+      cometSalesStageId: location.state.data.stageId,
+      cometCount: 1,
+      nickName: user_data.userNickname,
+      donationImage: imgName[0]
+
+    };
+
+    setDonationSend(img)
+
+    // if (client.readyState === client.OPEN) {
+
+    //   client.send(JSON.stringify(img));
+
+
+
+    // }
+
+
+    // console.log('2', this);
+    // console.log(this.target.value);
+    // setselectDonation(e.target.value);
   };
 
 
@@ -325,10 +383,32 @@ const Stage = (props) => {
                     <img src="/images/artist.svg" />
                     <div>
                       <div className="user">
-                        {msg.nickname}
+                        <div>
+                          {msg.type === 2 ? (
+                            <div>
+                              <div>{msg.nickName}</div>
+                            </div>
+
+                          ) : (
+                            <div>{msg.nickname}</div>
+                          )}
+                        </div>
                         <span>{currentTime}</span>
                       </div>
-                      <div>{msg.message}</div>
+                      <div>
+                        {/* {msg.type === 1 ? <div>{msg.message}</div> : <img src={`/images/stage/${msg.donationImage}.svg`} />} */}
+
+                        {msg.type === 2 ? (
+                          <div>
+                            <img src={`/images/stage/${msg.donationImage}.svg`} />
+                            <div>{msg.message}</div>
+                          </div>
+
+                        ) : (
+                          <div>{msg.message}</div>
+                        )}
+
+                      </div>
                     </div>
                   </ChatBox>
                 ))}
@@ -358,10 +438,11 @@ const Stage = (props) => {
                         key={id}
                         checked={focusedButton === id ? "focused" : ""}
                         onFocus={() => handleFocus(id)}
-                        // onFocus={handleFocus}
                         onBlur={handleBlur}
-                        value={data.name}
+                        value={chat}
                         onClick={handleDonation}
+                        onKeyPress={onKeyPress}
+                        onChange={onChange}
                       >
                         <div key={id}>
                           <img src={data.imgUrl} />
@@ -452,8 +533,9 @@ const DonationImgBox = styled.button`
     !checked
       ? ``
       : `border: 2px solid #273DFF;
-    `}
-
+      
+      `
+  }
   border-radius: 8px;
 `;
 
@@ -520,6 +602,7 @@ const ChatBox = styled.div`
   border-radius: 4px;
   padding: 20px;
   margin-top: 12px;
+      align-items: flex-start;
   > img {
   }
   > div {
@@ -527,12 +610,14 @@ const ChatBox = styled.div`
     > div {
       font-size: 1rem;
       &.user {
+        display: flex;
+    align-items: center;
         font-size: 1.125rem;
         margin-bottom: 5px;
         > span {
           font-size: 0.8rem;
           color: #999999;
-          margin-left: 5px;
+          margin-left: 6px;
         }
       }
     }
